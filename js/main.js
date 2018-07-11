@@ -8,23 +8,17 @@ function createMap(){
         minZoom: 10,
         //maxBounds: myBounds,
         zoomControl:true
-    }).setView([38.904167, -77.016111], 13);
+    }).setView([38.908, -77.034915], 12);
    
-    var streets = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        id: 'mapbox.streets',
-        accessToken: 'pk.eyJ1Ijoiam1qZmlzaGVyIiwiYSI6ImNqYXVlNDg3cDVhNmoyd21oZ296ZXpwdWMifQ.OGprR1AOquImP-bemM-f2g'
-    }).addTo(map);
-/*
-    var imagery = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        id: 'mapbox.satellite',
-        accessToken: 'pk.eyJ1Ijoiam1qZmlzaGVyIiwiYSI6ImNqYXVlNDg3cDVhNmoyd21oZ296ZXpwdWMifQ.OGprR1AOquImP-bemM-f2g'
-    });
+    var streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam1qZmlzaGVyIiwiYSI6ImNqYXVlNDg3cDVhNmoyd21oZ296ZXpwdWMifQ.OGprR1AOquImP-bemM-f2g').addTo(map);
+
+    var imagery = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam1qZmlzaGVyIiwiYSI6ImNqYXVlNDg3cDVhNmoyd21oZ296ZXpwdWMifQ.OGprR1AOquImP-bemM-f2g');
     
     var baseMaps = {
-        "Streets": streets,
+        "Default": streets,
         "Imagery": imagery
     }; 
-*/
+
     //use queue to parallelize asynchronous data loading
     d3.queue()
         .defer(d3.json, "data/blocks.topojson")
@@ -55,23 +49,23 @@ function createMap(){
 
         //add blank blocks to begin...
         blocksLayers["None"].addTo(map);
-/*     
-        //call function to get CTA and building stuff on map
-        var linesStationsBuildings = addOtherLayers(map, lines, stations, buildings, buffer);
-        
+    
+        //call function to get everything else available
+        var allOtherLayers = addOtherLayers(map, outline, lines, stations, rapidBus, brtBus);
+
         var groupedOverlays = {
-          "Tract Data Overlays": tractLayers,
-          "Reference Layers": linesStationsBuildings
+          "Block Overlays": blocksLayers,
+          "Reference Layers": allOtherLayers
         };
         
         //set options for groupedLayers control
         var options = {
-            exclusiveGroups: ["Tract Data Overlays"],
+            exclusiveGroups: ["Block Overlays"],
             //collapsed: false
         }
         
         L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
-        
+/*
         //change legend on block change
         map.on('overlayadd', function(layer){
             //on layer change, update the legend
@@ -179,14 +173,35 @@ function changeLegend(layer,tractScales,map){
     }
 }; // end of changeLegend
 
-function addOtherLayers(map,lines,stations,buildings,buffer){
+function addOtherLayers(map, outline, lines, stations, rapidBus, brtBus){
     
     var layerDict = {
-        'New Buildings Since 2010': null,
-        'CTA "L" Routes': null,
-        'CTA "L" Stations': null,
-        'CTA Stations 1-Mile Buffer': null
+        'DC Outline': null,
+        'Metrorail Lines': null,
+        'Metrorail Stations': null,
+        '2030 Rapid Bus': null,
+        '2030 Bus Rapid Transit': null
     };
+    
+    var rapidStyle = {
+        "color": 'purple',
+        "weight": 2.5,
+        "opacity": .8
+    };
+    
+    var rapidRoutes = L.geoJSON(rapidBus,{
+        style: rapidStyle
+    });
+    
+    var brtStyle = {
+        "color": 'green',
+        "weight": 2.5,
+        "opacity": .8
+    };
+    
+    var brtRoutes = L.geoJSON(brtBus,{
+        style: brtStyle
+    });
     
     var routes = L.geoJSON(lines,{
         style: function(feature){return routeStyle(feature)}
@@ -208,38 +223,21 @@ function addOtherLayers(map,lines,stations,buildings,buffer){
         onEachFeature: stationName
     }).addTo(map);
     
-    var buildingMarkerOptions = {
-        radius: 2,
-        fillColor: "purple",
-        color: 'purple',
-        weight: .5,
-        opacity: .9,
-        fillOpacity: .8
-    };
-    
-    var buildingPoints = L.geoJSON(buildings, {
-        pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, buildingMarkerOptions);
-        },
-        onEachFeature: buildingInfo
-    });
-    
-    var bufferOptions = {
-        fillColor: "#2F4F4F",
-        dashArray: "5, 5",
+    var outlineOptions = {
         color: "#000",
-        weight: 2,
-        opacity: 1,
-        fillOpacity: 0.15
+        weight: 3.5,
+        opacity: 0.8,
+        fillOpacity: 0
     };
     
-    var bufferPoly = L.geoJSON(buffer,{
-        style: bufferOptions});
+    var outlinePoly = L.geoJSON(outline,{
+        style: outlineOptions}).addTo(map);
     
-    layerDict['CTA "L" Routes'] = routes;
-    layerDict['CTA "L" Stations'] = stationPoints;
-    layerDict['CTA Stations 1-Mile Buffer'] = bufferPoly;
-    layerDict['New Buildings Since 2010'] = buildingPoints
+    layerDict['DC Outline'] = outlinePoly;
+    layerDict['Metrorail Lines'] = routes;
+    layerDict['Metrorail Stations'] = stationPoints;
+    layerDict['2030 Rapid Bus'] = rapidRoutes;
+    layerDict['2030 Bus Rapid Transit'] = brtRoutes;
     
     return layerDict;
 }; // end of  addOtherLayers;
@@ -261,7 +259,7 @@ function buildingInfo(feature,layer){
 
 function stationName(feature,layer){
     
-    var popupContent = feature.properties['LONGNAME'];
+    var popupContent = feature.properties['NAME'];
     
     layer.bindTooltip(popupContent, {
         offset: [0,-7],
@@ -271,24 +269,18 @@ function stationName(feature,layer){
 
 function routeStyle(feature){
     
-    var routeColor = feature.properties['LEGEND'];
+    var routeColor = feature.properties['NAME'];
     
-    if (routeColor === 'RD'){
+    if (routeColor === 'red'){
         var color = 'red' 
-    }else if(routeColor ==='BL'){
+    }else if(routeColor ==='blue'){
         var color = 'blue'
-    }else if(routeColor ==='BR'){
-        var color = 'brown'
-    }else if(routeColor ==='GR'){
+    }else if(routeColor ==='green'){
         var color = 'green'
-    }else if(routeColor ==='ML'){
-        var color = 'black'
-    }else if(routeColor ==='OR'){
+    }else if(routeColor ==='orange'){
         var color = 'orange'
-    }else if(routeColor ==='PK'){
-        var color = 'pink'
-    }else if(routeColor ==='PR'){
-        var color = 'purple'
+    }else if(routeColor ==='silver'){
+        var color = 'grey'
     }else{
         var color = 'yellow'
     };
@@ -296,7 +288,7 @@ function routeStyle(feature){
     //define style
     var myStyle = {
         "color": color,
-        "weight": 3,
+        "weight": 2.5,
         "opacity": .8
     };
     return myStyle;
@@ -326,9 +318,9 @@ function addBlocks(map, tracts) { //source: http://bl.ocks.org/Caged/5779481
     function resetHighlight(e) {
         var layer = e.target;
         layer.setStyle({
-        "weight": 0,
-        "opacity": 0.5,
-        "color": '#3a3a3a'
+        "weight": 1,
+        "opacity": 0.75,
+        "color": '#FFF'
         });
         if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
             layer.bringToFront();
@@ -378,7 +370,7 @@ function addBlocks(map, tracts) { //source: http://bl.ocks.org/Caged/5779481
                         "weight": 0,
                         "opacity": 0,
                         "color": '#3a3a3a',
-                        "className": String(feature.properties['CG_GEOID'])
+                        "className": String(feature.properties['GEOID'])
                     };
                     return myStyle;
                 }
@@ -390,7 +382,7 @@ function addBlocks(map, tracts) { //source: http://bl.ocks.org/Caged/5779481
         scaleDict[dictKey] = colorScale;
     }
     return [altDitc, scaleDict];
-}; // end of addTracts
+}; // end of addBlocks
 
 function setStyle(feature, colorscale, expressed){
     //find the feature's fill color based on scale and make sure it's not undefined
@@ -404,35 +396,18 @@ function setStyle(feature, colorscale, expressed){
     var myStyle = {
         "fillColor": fillColor,
         "fillOpacity": 0.5,
-        "weight": 0,
-        "opacity": 0.5,
-        "color": '#3a3a3a',
-        "className": String(feature.properties['CG_GEOID'])
+        "weight": 1,
+        "opacity": 0.75,
+        "color": '#FFF',
+        "className": String(feature.properties['GEOID'])
     };
     return myStyle;
 }; // end of  setStyle
 
 function makeColorScale(expressed,tracts){
     
-    var twoGreenThreeRed = ['UERPCTCHG','POVPCTCHG','ORRPCTCHG'];
-    var threeGreenTwoRed = ['HSPCTCHG'];
-    var twoRedThreeGreen = ['PCIPCTCHG','POPPCTCHG','BLKPCTCHG','ASNPCTCHG','HSPPCTCHG'];
-    var threeRedTwoGreen = ['WHTPCTCHG'];
-    var oneRedFourGreen = ['ORRPCTCHG'];
-    
-    if (twoGreenThreeRed.includes(expressed)){
-        var colorClasses = ['#74c476','#bae4b3','#fd8d3c','#f03b20','#bd0026'];
-    } else if (threeGreenTwoRed.includes(expressed)) {
-        var colorClasses = ['#74c476','#bae4b3','#edf8e9','#fd8d3c','#f03b20'];
-    } else if (twoRedThreeGreen.includes(expressed)) {
-        var colorClasses = ['#fd8d3c','#fecc5c','#74c476','#31a354','#006d2c'];
-    } else if (threeRedTwoGreen.includes(expressed)) {
-        var colorClasses = ['#f03b20','#fd8d3c','#fecc5c','#74c476','#31a354'];
-    } else if (expressed === 'GENT_IDX'){
-        var colorClasses = ['#ffffb2','#fecc5c','#fd8d3c','#f03b20','#bd0026'];
-    } else {
-        var colorClasses = ['#fd8d3c','#bae4b3','#74c476','#31a354','#006d2c'];
-    };
+    //var colorClasses = ['#f6eff7','#bdc9e1','#67a9cf','#1c9099','#016c59'];//blue
+    var colorClasses = ['#feebe2','#fbb4b9','#f768a1','#c51b8a','#7a0177'];//purple
 
     //create color scale generator
     var colorScale = d3.scaleQuantile()
