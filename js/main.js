@@ -1,3 +1,88 @@
+//function to init D3 charts
+function initCharts(){
+    
+    var height = $(window).height();
+    var bottom = String((height-595)/2)+'px';
+
+    $('#dataarea').load('img/main_chart.svg');
+    $('#main-chart').css("bottom", bottom);
+    
+    d3.queue()
+        .defer(d3.csv, "data/dc_pop.csv") //load attributes from csv
+        .defer(d3.csv, "data/dc_car_regi.csv") //load attributes from csv
+        .defer(d3.csv, "data/fares.csv") //load attributes from csv
+        .defer(d3.csv, "data/ridership.csv") //load attributes from csv
+        .defer(d3.csv, "data/transport_work.csv") //load attributes from csv
+        .await(callback);
+    
+    function callback(error,popCSV,regiCSV,faresCSV,rideCSV,transportCSV){
+        
+        var popDataDict = [];
+        for (var i=0; i < popCSV.length; i++) {
+            popDataDict.push({
+                year: popCSV[i]["YEAR"],
+                pop: popCSV[i]["POP"]
+            });
+        };
+        console.log(popDataDict)
+        
+        var regDataDict = [];
+        for (var i=0; i < regiCSV.length; i++) {
+            regDataDict.push({
+                year: regiCSV[i]["YEAR"],
+                regs: regiCSV[i]["REGS"]
+            });
+        };
+        console.log(regDataDict)
+        
+        var fareDataDict = [];
+        for (var i=0; i < faresCSV.length; i++) {
+            fareDataDict.push({
+                date: faresCSV[i]["DATE"],
+                fare: faresCSV[i]["FARE"],
+                pcc: faresCSV[i]["PCC"]
+            });
+        };
+        console.log(fareDataDict)
+        
+        var rideDataDict = [];
+        for (var i=0; i < rideCSV.length; i++) {
+            rideDataDict.push({
+                year: rideCSV[i]["YEAR"],
+                rides: rideCSV[i]["RIDE"]
+            });
+        };
+        console.log(rideDataDict)
+        
+        var transportDataDict = [];
+        for (var i=0; i < transportCSV.length; i++) {
+            transportDataDict.push({
+                year: transportCSV[i]["YEAR"],
+                tot: transportCSV[i]["TOT"],
+                drive: transportCSV[i]["DRIVE"],
+                cp: transportCSV[i]["CP"],
+                pub: transportCSV[i]["PUB"],
+                walk: transportCSV[i]["WALK"],
+                other: transportCSV[i]["OTHER"],
+                wah: transportCSV[i]["WAH"]
+            });
+        };
+        console.log(transportDataDict)
+        
+        $('#ridership-17').mouseover(function(){
+            alert("testing");
+        })
+        
+        /*
+            .on("mouseover", highlight)
+            .on("mouseout", dehighlight)
+            .on("mousemove", moveLabel);
+        */
+        
+    };// end callback
+    
+};//end initCharts
+
 //function to instantiate the Leaflet map
 function createMap(){
     
@@ -428,57 +513,6 @@ function makeColorScale(expressed,tracts){
     return colorScale;
 }; // end of  makeColorScale
 
-//delayed scrolling between page sections
-function smoothScroll(){
-  // Add smooth scrolling to all links
-  $(".js-scroll").on('click', function(event) {
 
-    // Make sure this.hash has a value before overriding default behavior
-    if (this.hash !== "") {
-      // Prevent default anchor click behavior
-      event.preventDefault();
-
-      // Store hash
-      var hash = this.hash;
-
-      // Using jQuery's animate() method to add smooth page scroll
-      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top
-      }, 700, function(){
-   
-        // Add hash (#) to URL when done scrolling (default click behavior)
-        window.location.hash = hash;
-      });
-    }
-  });
-}; // end of smoothScroll
-
-function scrollify(){
-    $.scrollify({
-        section : "#home,#maparea,#dataarea,#aboutarea",
-        easing: "easeOutExpo",
-        scrollSpeed: 700,
-        offset : 0,
-        scrollbars: true,
-        standardScrollElements: "",
-        setHeights: true,
-        overflowScroll: true,
-        updateHash: false,
-        touchScroll:true,
-        before:function() {},
-        after:function() {},
-        afterResize:function() {},
-        afterRender:function() {}
-    });
-};
-
-function smallBrowser(){
-    d3.select('#data').append("div")
-        .attr('class','small-browser')
-        .html('<h4 id="mobile-message">(It looks as if your browser is too thin for this chart to function usefully. Please visit again on a tablet or computer. Thank you.)</h4>');
-};
-
-$(document).ready(createMap);
-//$(document).ready(smoothScroll);
-//$(document).ready(scrollify);
+//$(document).ready(createMap);
+$(document).ready(initCharts);
