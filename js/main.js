@@ -1,11 +1,92 @@
-//function to init D3 charts
-function initCharts(){
-    
-    var height = $(window).height();
-    var bottom = String((height-595)/2)+'px';
+// using d3 for convenience, and storing a selected elements
+var Container = d3.select('#scroll');
+var Graphic = Container.select('.scroll__graphic');
+var Chart = Graphic.select('.chart');
+var Text = Container.select('.scroll__text');
+var Step = Text.selectAll('.step');
 
-    $('#dataarea').load('img/main_chart.svg');
-    $('#main-chart').css("bottom", bottom);
+// initialize the scrollama
+var scroller = scrollama();
+
+function handleResize() {
+	// 1. update height of step elements for breathing room between steps
+	var stepHeight = Math.floor(window.innerHeight * 0.75);
+	Step.style('height', stepHeight + 'px');
+
+	// 2. update height of graphic element
+	var bodyWidth = d3.select('body').node().offsetWidth;
+
+	Graphic
+		.style('height', window.innerHeight + 'px');
+
+	// 3. update width of chart by subtracting from text width
+	var chartMargin = 32;
+	var textWidth = Text.node().offsetWidth;
+	var chartWidth = Graphic.node().offsetWidth - textWidth - chartMargin;
+	// make the height 1/2 of viewport
+	var chartHeight = Math.floor(window.innerHeight / 2);
+
+	Chart
+		.style('width', chartWidth + 'px')
+		.style('height', chartHeight + 'px');
+
+	// 4. tell scrollama to update new element dimensions
+	scroller.resize();
+}
+
+function handleStepEnter(response) {
+	// response = { element, direction, index }
+
+	// fade in current step
+	Step.classed('is-active', function (d, i) {
+		return i === response.index;
+	})
+
+	// update graphic based on step here
+	var stepData = Step.attr('data-step')
+}
+
+function handleContainerEnter(response) {
+	// response = { direction }
+
+	// sticky the graphic
+	Graphic.classed('is-fixed', true);
+	Graphic.classed('is-bottom', false);
+}
+
+function handleContainerExit(response) {
+	// response = { direction }
+
+	// un-sticky the graphic, and pin to top/bottom of container
+	Graphic.classed('is-fixed', false);
+	Graphic.classed('is-bottom', response.direction === 'down');
+}
+
+//function to init charts
+function initCharts(){
+
+    $('.chart').load('img/main_chart.svg');
+    
+	// 1. call a resize on load to update width/height/position of elements
+	handleResize();
+
+	// 2. setup the scrollama instance
+	// 3. bind scrollama event handlers (this can be chained like below)
+	scroller
+		.setup({
+			container: '#scroll', // our outermost scrollytelling element
+			graphic: '.scroll__graphic', // the graphic
+			text: '.scroll__text', // the step container
+			step: '.scroll__text .step', // the step elements
+			offset: 0.5, // set the trigger to be 1/2 way down screen
+			debug: true, // display the trigger offset for testing
+		})
+		.onStepEnter(handleStepEnter)
+		.onContainerEnter(handleContainerEnter)
+		.onContainerExit(handleContainerExit);
+
+	// setup resize event
+	window.addEventListener('resize', handleResize);
     
     d3.queue()
         .defer(d3.csv, "data/dc_pop.csv") //load attributes from csv
