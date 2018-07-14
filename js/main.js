@@ -1,92 +1,150 @@
-// using d3 for convenience, and storing a selected elements
-var Container = d3.select('#scroll');
-var Graphic = Container.select('.scroll__graphic');
-var Chart = Graphic.select('.chart');
-var Text = Container.select('.scroll__text');
-var Step = Text.selectAll('.step');
+//https://pudding.cool/process/introducing-scrollama/
 
-// initialize the scrollama
-var scroller = scrollama();
-
-function handleResize() {
-	// 1. update height of step elements for breathing room between steps
-	var stepHeight = Math.floor(window.innerHeight * 0.75);
-	Step.style('height', stepHeight + 'px');
-
-	// 2. update height of graphic element
-	var bodyWidth = d3.select('body').node().offsetWidth;
-
-	Graphic
-		.style('height', window.innerHeight + 'px');
-
-	// 3. update width of chart by subtracting from text width
-	var chartMargin = 32;
-	var textWidth = Text.node().offsetWidth;
-	var chartWidth = Graphic.node().offsetWidth - textWidth - chartMargin;
-	// make the height 1/2 of viewport
-	var chartHeight = Math.floor(window.innerHeight / 2);
-
-	Chart
-		.style('width', chartWidth + 'px')
-		.style('height', chartHeight + 'px');
-
-	// 4. tell scrollama to update new element dimensions
-	scroller.resize();
-}
-
-function handleStepEnter(response) {
-	// response = { element, direction, index }
-
-	// fade in current step
-	Step.classed('is-active', function (d, i) {
-		return i === response.index;
-	})
-
-	// update graphic based on step here
-	var stepData = Step.attr('data-step')
-}
-
-function handleContainerEnter(response) {
-	// response = { direction }
-
-	// sticky the graphic
-	Graphic.classed('is-fixed', true);
-	Graphic.classed('is-bottom', false);
-}
-
-function handleContainerExit(response) {
-	// response = { direction }
-
-	// un-sticky the graphic, and pin to top/bottom of container
-	Graphic.classed('is-fixed', false);
-	Graphic.classed('is-bottom', response.direction === 'down');
-}
-
-//function to init charts
-function initCharts(){
-
-    $('.chart').load('img/main_chart.svg');
+function attachHoverChart(pop,reg,ride){
     
-	// 1. call a resize on load to update width/height/position of elements
-	handleResize();
+    for (i=0; i<pop.length; i++){
+        var year = (pop[i].year).slice(-2);
+        var value = "Population: "+pop[i].pop;
+        console.log(year,value);
+    };
+    
+    for (i=0; i<reg.length; i++){
+        var year = (reg[i].year).slice(-2);
+        var value = "Registrations: "+reg[i].regs;
+        console.log(year,value);
+    };
+    
+    for (i=0; i<ride.length; i++){
+        var year = (ride[i].year).slice(-2);
+        var value = "Ridership (thousands): "+ride[i].rides;
+        console.log(year,value);
+    };
+}; //end attachHoverChart
 
-	// 2. setup the scrollama instance
-	// 3. bind scrollama event handlers (this can be chained like below)
-	scroller
-		.setup({
-			container: '#scroll', // our outermost scrollytelling element
-			graphic: '.scroll__graphic', // the graphic
-			text: '.scroll__text', // the step container
-			step: '.scroll__text .step', // the step elements
-			offset: 0.5, // set the trigger to be 1/2 way down screen
-			debug: true, // display the trigger offset for testing
-		})
-		.onStepEnter(handleStepEnter)
-		.onContainerEnter(handleContainerEnter)
-		.onContainerExit(handleContainerExit);
+function handleStepEnter(response){
+    var years = ['11','12','13','14','15','16','17']
+    var index = response.index;
+    if (index == 0) {
+        for (i=0; i< years.length; i++){
+            var year = years[i];
+            var bar = '#population-'+year
+            var label = '#population-b'
+            $(bar).css('stroke','#FF6700')
+            $(bar).css('stroke-width','3')
+            $(label).css('stroke','#FF6700')
+            $(label).css('stroke-width','3')
+        }
+    } else if (index == 1){
+        for (i=0; i< years.length; i++){
+            var year = years[i];
+            var bar = '#registration-'+year
+            var label = '#registration-b'
+            $(bar).css('stroke','#FF6700')
+            $(bar).css('stroke-width','3')
+            $(label).css('stroke','#FF6700')
+            $(label).css('stroke-width','3')
+        }
+    } else if (index == 2){
+        for (i=0; i< years.length-1; i++){
+            var year = years[i];
+            var bar = '#traffic-'+year
+            var label = '#traffic-b'
+            $(bar).css('stroke','#FF6700')
+            $(bar).css('stroke-width','3')
+            $(label).css('stroke','#FF6700')
+            $(label).css('stroke-width','3')
+        }
+    } else if (index == 3){
+        for (i=0; i< years.length; i++){
+            var year = years[i];
+            var bar = '#ridership-'+year
+            var label = '#ridership-b'
+            $(bar).css('stroke','#FF6700')
+            $(bar).css('stroke-width','3')
+            $(label).css('stroke','#FF6700')
+            $(label).css('stroke-width','3')
+        }
+    };
+}; //end handleStepEnter
 
-	// setup resize event
-	window.addEventListener('resize', handleResize);
+function handleStepExit(response){
+    var years = ['11','12','13','14','15','16','17']
+    var index = response.index;
+    if (index == 0) {
+        for (i=0; i< years.length; i++){
+            var year = years[i];
+            var bar = '#population-'+year
+            var label = '#population-b'
+            $(bar).css('stroke','#a6cee3')
+            $(bar).css('stroke-width','.5')
+            $(label).css('stroke','#a6cee3')
+            $(label).css('stroke-width','.5')
+        }
+    } else if (index == 1){
+        for (i=0; i< years.length; i++){
+            var year = years[i];
+            var bar = '#registration-'+year
+            var label = '#registration-b'
+            $(bar).css('stroke','#1f78b4')
+            $(bar).css('stroke-width','.5')
+            $(label).css('stroke','#1f78b4')
+            $(label).css('stroke-width','.5')
+        }
+    } else if (index == 2){
+        for (i=0; i< years.length-1; i++){
+            var year = years[i];
+            var bar = '#traffic-'+year
+            var label = '#traffic-b'
+            $(bar).css('stroke','#b2df8a')
+            $(bar).css('stroke-width','.5')
+            $(label).css('stroke','#b2df8a')
+            $(label).css('stroke-width','.5')
+        }
+    } else if (index == 3){
+        for (i=0; i< years.length; i++){
+            var year = years[i];
+            var bar = '#ridership-'+year
+            var label = '#ridership-b'
+            $(bar).css('stroke','#33a02c')
+            $(bar).css('stroke-width','.5')
+            $(label).css('stroke','#33a02c')
+            $(label).css('stroke-width','.5')
+        }
+    };
+}; //end handleStepExit
+
+function handleContainerEnter(direction){
+    var graphic = d3.select('.scroll__graphic')
+    graphic.classed('is-fixed', true);
+    graphic.classed('is-bottom', false);
+}
+
+function handleContainerExit(response){
+    var graphic = d3.select('.scroll__graphic')
+	graphic.classed('is-fixed', false);
+	graphic.classed('is-bottom', response.direction === 'down');
+}
+
+//function to init D3 charts
+function initCharts(){
+    
+    // instantiate the scrollama
+    const scroller = scrollama();
+
+    // setup the instance, pass callback functions
+    scroller
+      .setup({
+        step: '.scroll__text .step', // required
+        container: '.scroll', // required (for sticky)
+        graphic: '.scroll__graphic', // required (for sticky)
+        debug: false
+      })
+      .onStepEnter(handleStepEnter)
+      .onStepExit(handleStepExit)
+      .onContainerEnter(handleContainerEnter)
+      .onContainerExit(handleContainerExit);
+
+    $('.scroll__graphic').load('img/main_chart.svg');
     
     d3.queue()
         .defer(d3.csv, "data/dc_pop.csv") //load attributes from csv
@@ -105,7 +163,6 @@ function initCharts(){
                 pop: popCSV[i]["POP"]
             });
         };
-        console.log(popDataDict)
         
         var regDataDict = [];
         for (var i=0; i < regiCSV.length; i++) {
@@ -114,7 +171,6 @@ function initCharts(){
                 regs: regiCSV[i]["REGS"]
             });
         };
-        console.log(regDataDict)
         
         var fareDataDict = [];
         for (var i=0; i < faresCSV.length; i++) {
@@ -124,7 +180,6 @@ function initCharts(){
                 pcc: faresCSV[i]["PCC"]
             });
         };
-        console.log(fareDataDict)
         
         var rideDataDict = [];
         for (var i=0; i < rideCSV.length; i++) {
@@ -133,7 +188,6 @@ function initCharts(){
                 rides: rideCSV[i]["RIDE"]
             });
         };
-        console.log(rideDataDict)
         
         var transportDataDict = [];
         for (var i=0; i < transportCSV.length; i++) {
@@ -148,17 +202,8 @@ function initCharts(){
                 wah: transportCSV[i]["WAH"]
             });
         };
-        console.log(transportDataDict)
         
-        $('#ridership-17').mouseover(function(){
-            alert("testing");
-        })
-        
-        /*
-            .on("mouseover", highlight)
-            .on("mouseout", dehighlight)
-            .on("mousemove", moveLabel);
-        */
+        attachHoverChart(popDataDict,regDataDict,rideDataDict);
         
     };// end callback
     

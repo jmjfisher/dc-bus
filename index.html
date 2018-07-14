@@ -21,30 +21,43 @@
             <h1>Just a test...</h1>
             <p>This is so great</p>
         </div>
-        
-        <!--DATA VIZ-->
-        <section id='scroll'>
-            <div class='scroll__graphic'>
-                <div class='chart'>
-                </div>
-            </div>
 
-            <!--  step/text container  -->
+        <!--DATA VIZ-->
+        
+        <!-- container = ".scroll" -->
+        <div class='scroll'>
+            <!-- graphic = ".scroll__graphic" -->
+            <div class='scroll__graphic'>
+            <!--jquery add svg-->
+            </div>
             <div class='scroll__text'>
-                <div class='step' data-step='1'>
-                    <p>STEP 1</p>
+                <!-- steps = ".step" -->
+                <div class='step' data-step='a'>
+                    <p>testing 1</p>
+                    <p>testing 1</p>
+                    <p>testing 1</p>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                 </div>
-                <div class='step' data-step='2'>
-                    <p>STEP 2</p>
+                <div class='step' data-step='b'>
+                    <p>testing 2</p>
+                    <p>testing 1</p>
+                    <p>testing 1</p>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                 </div>
-                <div class='step' data-step='3'>
-                    <p>STEP 3</p>
+                <div class='step' data-step='c'>
+                    <p>testing 3</p>
+                    <p>testing 1</p>
+                    <p>testing 1</p>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                 </div>
-                <div class='step' data-step='4'>
-                    <p>STEP 4</p>
+                <div class='step' data-step='d'>
+                    <p>testing 4</p>
+                    <p>testing 1</p>
+                    <p>testing 1</p>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                 </div>
             </div>
-        </section>
+        </div>
         
         <!--MAP-->
 
@@ -58,6 +71,7 @@
         <!--SCRIPTS-->
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src='https://unpkg.com/intersection-observer'></script>
         <script src='https://unpkg.com/scrollama'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
         <script src="https://unpkg.com/topojson@3"></script>
