@@ -5,19 +5,16 @@ function attachHoverChart(pop,reg,ride){
     for (i=0; i<pop.length; i++){
         var year = (pop[i].year).slice(-2);
         var value = "Population: "+pop[i].pop;
-        console.log(year,value);
     };
     
     for (i=0; i<reg.length; i++){
         var year = (reg[i].year).slice(-2);
         var value = "Registrations: "+reg[i].regs;
-        console.log(year,value);
     };
     
     for (i=0; i<ride.length; i++){
         var year = (ride[i].year).slice(-2);
         var value = "Ridership (thousands): "+ride[i].rides;
-        console.log(year,value);
     };
 }; //end attachHoverChart
 
@@ -209,6 +206,49 @@ function initCharts(){
     
 };//end initCharts
 
+function addBusStops(map) {
+    var selectRoute = $('#routes-select').val();
+    if (selectRoute == 'none'){
+        alert('Please select a route from the list.')
+    } else {
+        var key = 'cxZZf9-tgRgJseGvWAmC4Q';
+        var getURL = 'https://jjfisher2.carto.com/api/v2/sql?format=GeoJSON&q=';
+        var sql = "SELECT name, the_geom FROM jjfisher2.dc_bus_stops WHERE stopid in (SELECT stopid FROM jjfisher2.dc_stop_route WHERE route='"+selectRoute+"')&api_key=";
+
+        $.getJSON(getURL+sql+key, function(data){
+            var features = data.features;
+                
+            var busMarkerOptions = {
+                radius: 3.5,
+                fillColor: "black",
+                color: "red",
+                weight: .75,
+                opacity: 0.8,
+                fillOpacity: 0.8
+            };
+
+            var busPoints = L.geoJSON(features, {
+                pointToLayer: function (feature, latlng) {
+                    return L.circleMarker(latlng, busMarkerOptions);
+                },
+                onEachFeature: busStopName
+            }).addTo(map);
+            
+            map.fitBounds(busPoints.getBounds(), {padding:[25,25]});
+            
+            $('#add-button').attr("disabled","disabled");
+            $('#clear-button').removeAttr("disabled");
+            $('#clear-button').click(function(){
+                map.removeLayer(busPoints);
+                $('#add-button').removeAttr("disabled");
+                $('#clear-button').attr("disabled","disabled");
+            });
+        });
+
+    }
+
+}; //end AddBusStops
+
 //function to instantiate the Leaflet map
 function createMap(){
     
@@ -239,9 +279,10 @@ function createMap(){
         .defer(d3.json, "data/metro_stations.topojson")
         .defer(d3.json, "data/rapid_bus.topojson")
         .defer(d3.json, "data/rapid_bus_trans.topojson")
+        .defer(d3.csv, "data/dc_routes.csv")
         .await(callback);
         
-    function callback (error, blocksTopo, dcTopo, busStopsTopo, linesTopo, stationsTopo, rapidTopo, brtTopo) {
+    function callback (error,blocksTopo,dcTopo,busStopsTopo,linesTopo,stationsTopo,rapidTopo,brtTopo,routesCSV) {
         
         //grab the features from the topojsons
         var blocks = topojson.feature(blocksTopo, blocksTopo.objects.blocks).features;
@@ -251,7 +292,15 @@ function createMap(){
         var stations = topojson.feature(stationsTopo, stationsTopo.objects.metro_stations).features;
         var rapidBus = topojson.feature(rapidTopo, rapidTopo.objects.rapid_bus).features;
         var brtBus = topojson.feature(brtTopo, brtTopo.objects.rapid_bus_trans).features;
-        console.log(blocks, outline, stops, lines, stations, rapidBus, brtBus);
+        
+        for (i=0; i<routesCSV.length; i++){
+            var route = String(routesCSV[i]['ROUTE']);
+            $('#routes-select').append("<option value="+route+">"+route+"</option>")
+        };
+        
+        $('#add-button').click(function(){
+            addBusStops(map)
+        });
 
         //call function to add tracts information to add-able layers
         var blocksInformation = addBlocks(map, blocks);
@@ -418,6 +467,16 @@ function addOtherLayers(map, outline, lines, stations, rapidBus, brtBus){
         style: function(feature){return routeStyle(feature)}
     }).addTo(map);
     
+    var outlineOptions = {
+        color: "#000",
+        weight: 3.5,
+        opacity: 0.8,
+        fillOpacity: 0
+    };
+    
+    var outlinePoly = L.geoJSON(outline,{
+        style: outlineOptions}).addTo(map);
+    
     var stationMarkerOptions = {
         radius: 4,
         fillColor: "white",
@@ -433,16 +492,6 @@ function addOtherLayers(map, outline, lines, stations, rapidBus, brtBus){
         },
         onEachFeature: stationName
     }).addTo(map);
-    
-    var outlineOptions = {
-        color: "#000",
-        weight: 3.5,
-        opacity: 0.8,
-        fillOpacity: 0
-    };
-    
-    var outlinePoly = L.geoJSON(outline,{
-        style: outlineOptions}).addTo(map);
     
     layerDict['DC Outline'] = outlinePoly;
     layerDict['Metrorail Lines'] = routes;
@@ -477,6 +526,16 @@ function stationName(feature,layer){
         direction: 'top',
         className: 'popupStation'});
 } // end of  stationNAME
+
+function busStopName(feature,layer){
+    
+    var popupContent = feature.properties['name'];
+    
+    layer.bindTooltip(popupContent, {
+        offset: [0,-7],
+        direction: 'top',
+        className: 'popupStop'});
+} // end of busStopName
 
 function routeStyle(feature){
     
@@ -640,5 +699,5 @@ function makeColorScale(expressed,tracts){
 }; // end of  makeColorScale
 
 
-//$(document).ready(createMap);
+$(document).ready(createMap);
 $(document).ready(initCharts);
