@@ -144,17 +144,16 @@ function initCharts(){
 
     $('.scroll__graphic').load('img/main_chart.svg');
     $('#chart-2').load('img/transport_chart.svg');
-    //$('#chart-3').load('img/main_chart.svg');
+    $('#chart-3').load('img/fare_chart.svg');
     
     d3.queue()
         .defer(d3.csv, "data/dc_pop.csv") //load attributes from csv
         .defer(d3.csv, "data/dc_car_regi.csv") //load attributes from csv
-        .defer(d3.csv, "data/fares.csv") //load attributes from csv
         .defer(d3.csv, "data/ridership.csv") //load attributes from csv
         .defer(d3.csv, "data/transport_work.csv") //load attributes from csv
         .await(callback);
     
-    function callback(error,popCSV,regiCSV,faresCSV,rideCSV,transportCSV){
+    function callback(error,popCSV,regiCSV,rideCSV,transportCSV){
         
         var popDataDict = [];
         for (var i=0; i < popCSV.length; i++) {
@@ -172,15 +171,6 @@ function initCharts(){
             });
         };
         
-        var fareDataDict = [];
-        for (var i=0; i < faresCSV.length; i++) {
-            fareDataDict.push({
-                date: faresCSV[i]["DATE"],
-                fare: faresCSV[i]["FARE"],
-                pcc: faresCSV[i]["PCC"]
-            });
-        };
-        
         var rideDataDict = [];
         for (var i=0; i < rideCSV.length; i++) {
             rideDataDict.push({
@@ -193,17 +183,22 @@ function initCharts(){
         for (var i=0; i < transportCSV.length; i++) {
             transportDataDict.push({
                 year: transportCSV[i]["YEAR"],
-                tot: transportCSV[i]["TOT"],
                 drive: transportCSV[i]["DRIVE"],
                 cp: transportCSV[i]["CP"],
                 pub: transportCSV[i]["PUB"],
                 walk: transportCSV[i]["WALK"],
                 other: transportCSV[i]["OTHER"],
-                wah: transportCSV[i]["WAH"]
+                wah: transportCSV[i]["WAH"],
+                drivep: transportCSV[i]["DRIVE_P"],
+                cpp: transportCSV[i]["CP_P"],
+                pubp: transportCSV[i]["PUB_P"],
+                walkp: transportCSV[i]["WALK_P"],
+                otherp: transportCSV[i]["OTHER_P"],
+                wahp: transportCSV[i]["WAH_P"]
             });
         };
         
-        attachHoverChart(popDataDict,regDataDict,rideDataDict);
+        attachHoverChart(popDataDict,regDataDict,rideDataDict,transportDataDict);
         
     };// end callback
 };//end initCharts
