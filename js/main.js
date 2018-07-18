@@ -1,4 +1,5 @@
 //https://pudding.cool/process/introducing-scrollama/
+//https://design.tutsplus.com/tutorials/how-to-create-an-editable-bar-chart-in-adobe-illustrator--cms-30149
 
 function attachHoverChart(pop,reg,ride){
     
@@ -142,6 +143,8 @@ function initCharts(){
       .onContainerExit(handleContainerExit);
 
     $('.scroll__graphic').load('img/main_chart.svg');
+    $('#chart-2').load('img/transport_chart.svg');
+    //$('#chart-3').load('img/main_chart.svg');
     
     d3.queue()
         .defer(d3.csv, "data/dc_pop.csv") //load attributes from csv
@@ -203,7 +206,6 @@ function initCharts(){
         attachHoverChart(popDataDict,regDataDict,rideDataDict);
         
     };// end callback
-    
 };//end initCharts
 
 function addBusStops(map) {
@@ -244,9 +246,7 @@ function addBusStops(map) {
                 $('#clear-button').attr("disabled","disabled");
             });
         });
-
     }
-
 }; //end AddBusStops
 
 //function to instantiate the Leaflet map
@@ -279,10 +279,11 @@ function createMap(){
         .defer(d3.json, "data/metro_stations.topojson")
         .defer(d3.json, "data/rapid_bus.topojson")
         .defer(d3.json, "data/rapid_bus_trans.topojson")
+        .defer(d3.json, "data/traffic_20.topojson")
         .defer(d3.csv, "data/dc_routes.csv")
         .await(callback);
         
-    function callback (error,blocksTopo,dcTopo,busStopsTopo,linesTopo,stationsTopo,rapidTopo,brtTopo,routesCSV) {
+    function callback (error,blocksTopo,dcTopo,busStopsTopo,linesTopo,stationsTopo,rapidTopo,brtTopo,trafficTopo,routesCSV) {
         
         //grab the features from the topojsons
         var blocks = topojson.feature(blocksTopo, blocksTopo.objects.blocks).features;
@@ -292,6 +293,7 @@ function createMap(){
         var stations = topojson.feature(stationsTopo, stationsTopo.objects.metro_stations).features;
         var rapidBus = topojson.feature(rapidTopo, rapidTopo.objects.rapid_bus).features;
         var brtBus = topojson.feature(brtTopo, brtTopo.objects.rapid_bus_trans).features;
+        var traffic = topojson.feature(trafficTopo, trafficTopo.objects.traffic_20).features;
         
         for (i=0; i<routesCSV.length; i++){
             var route = String(routesCSV[i]['ROUTE']);
@@ -311,7 +313,7 @@ function createMap(){
         blocksLayers["None"].addTo(map);
     
         //call function to get everything else available
-        var allOtherLayers = addOtherLayers(map, outline, lines, stations, rapidBus, brtBus);
+        var allOtherLayers = addOtherLayers(map, outline, lines, stations, rapidBus, brtBus, traffic);
 
         var groupedOverlays = {
           "Block Overlays": blocksLayers,
@@ -333,15 +335,7 @@ function createMap(){
         })
 */
     };
-/*
-    var sidebar = L.control.sidebar('sidebar', {
-        position: 'left'
-    });
 
-    map.addControl(sidebar);
-    sidebar.show();
-    sidebar.setContent('<h4 class="sidebar-title">Displacement and Gentrification Indicator Map</h4><br><p>This map allows you to visualize economic, education, housing, and population indicators that may help in the identification of areas of gentrification and/or displacement in Cook County, IL.</p><p>Hover your mouse over the <b>layers button</b> in the top right corner of the map to display and toggle between the available basemaps, census tract choropleth overlays, and reference layers. You may also click on any tract to retrieve more information about it and zoom and center the map to a tract by searching its ID.</p><p><i>How do I find a tract ID?</i> Scroll down to the corresponding dynamic parallel coordinates <b><a class="js-scroll" href="#dataarea">chart</a></b> where you can click and drag along the scales to refresh a list of tract IDs that meet the criteria of your choosing.</p><p>Learn more <b><a class= "js-scroll" href="#about">about</a></b> the data and developers.</p>');
-*/
     $(".leaflet-control-container").on('mousedown dblclick pointerdown wheel', function(ev){
         L.DomEvent.stopPropagation(ev);
     });
@@ -433,14 +427,15 @@ function changeLegend(layer,tractScales,map){
     }
 }; // end of changeLegend
 
-function addOtherLayers(map, outline, lines, stations, rapidBus, brtBus){
+function addOtherLayers(map, outline, lines, stations, rapidBus, brtBus, traffic){
     
     var layerDict = {
         'DC Outline': null,
         'Metrorail Lines': null,
         'Metrorail Stations': null,
         '2030 Rapid Bus': null,
-        '2030 Bus Rapid Transit': null
+        '2030 Bus Rapid Transit': null,
+        '2016 Traffic Density': null
     };
     
     var rapidStyle = {
@@ -467,6 +462,23 @@ function addOtherLayers(map, outline, lines, stations, rapidBus, brtBus){
         style: function(feature){return routeStyle(feature)}
     }).addTo(map);
     
+/*
+    var colorScale = roadColorScale(traffic);
+    
+    var streets = L.geoJSON(traffic,{
+        style: function(feature){return streetStyle(feature,colorScale)}
+    });
+*/
+    var streetStyle = {
+        "color": '#d7191c',
+        "weight": 2,
+        "opacity": .8
+    };
+    
+    var streets = L.geoJSON(traffic,{
+        style: streetStyle
+    });
+
     var outlineOptions = {
         color: "#000",
         weight: 3.5,
@@ -498,24 +510,10 @@ function addOtherLayers(map, outline, lines, stations, rapidBus, brtBus){
     layerDict['Metrorail Stations'] = stationPoints;
     layerDict['2030 Rapid Bus'] = rapidRoutes;
     layerDict['2030 Bus Rapid Transit'] = brtRoutes;
+    layerDict['2016 Traffic Density'] = streets;
     
     return layerDict;
 }; // end of  addOtherLayers;
-
-function buildingInfo(feature,layer){
-    
-    var year = '<b>Year</b>: ' + String(feature.properties['ISSUE_DATE']).slice(0,4);
-    var cost = '<b>Cost</b>: $' + feature.properties['EST_COST'].toLocaleString('en');
-    var address = '<b>Address</b>: ' + String(feature.properties['STREET_NUM']) + ' ' + String(feature.properties['STREET_DIR']) + ' ' + String(feature.properties['STREET_NAM']) + ' ' + String(feature.properties['SUFFIX']);
-    var permit = '<b>Permit #</b>: ' + String(feature.properties['PERMIT_NO']);
-    
-    var popupContent = year + '<br>' + cost + '<br>' + address + '<br>' + permit;
-    
-    layer.bindTooltip(popupContent, {
-        offset: [0,-7],
-        direction: 'top',
-        className: 'popupBuilding'});
-} // end of buildingInfo
 
 function stationName(feature,layer){
     
@@ -563,6 +561,21 @@ function routeStyle(feature){
     };
     return myStyle;
 }; // end of  routeStyle
+
+/*
+function streetStyle(feature,scale){
+    
+    var color = scale(feature.properties['AADT']);
+    
+    //define style
+    var myStyle = {
+        "color": color,
+        "weight": 2,
+        "opacity": .8
+    };
+    return myStyle;
+}; // end of  streetStyle
+*/
 
 function addBlocks(map, tracts) { //source: http://bl.ocks.org/Caged/5779481
     
@@ -698,6 +711,30 @@ function makeColorScale(expressed,tracts){
     return colorScale;
 }; // end of  makeColorScale
 
+/*
+function roadColorScale(roads){
+    
+    var colorClasses = ['#d7191c','#fdae61','#ffffbf','#a6d96a','#1a9641'];
+
+    //create color scale generator
+    var colorScale = d3.scaleQuantile()
+        .range(colorClasses);
+
+    //build array of all values of the expressed attribute
+    var domainArray = [];
+    for (var i=0; i<roads.length; i++){
+        var check = roads[i].properties['AADT'];
+        if (check !== 'UNDEF') {
+            var val = parseFloat(check);
+            domainArray.push(val);
+        }
+    };
+    //assign array of last 4 cluster minimums as domain
+    colorScale.domain(domainArray);
+
+    return colorScale;
+}; // end of  roadColorScale
+*/
 
 $(document).ready(createMap);
 $(document).ready(initCharts);
