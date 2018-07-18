@@ -120,6 +120,15 @@ body {
     width: 100%;
     position: relative;
 }
+.data-tooltip {
+    background-color: #282828;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: white;
+}
 
 .leaflet-control {
     opacity: .9;

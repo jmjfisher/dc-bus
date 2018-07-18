@@ -1,22 +1,205 @@
 //https://pudding.cool/process/introducing-scrollama/
 //https://design.tutsplus.com/tutorials/how-to-create-an-editable-bar-chart-in-adobe-illustrator--cms-30149
 
-function attachHoverChart(pop,reg,ride){
+function positionTooltip(event){
+    var tPosX = event.pageX - 160;
+    var tPosY = event.pageY - 85;
+    $('.data-tooltip').css({'position': 'absolute', 'top': tPosY+'px', 'left': tPosX+'px'});
+};
+
+function attachHoverChart(pop,reg,ride,work){  
     
-    for (i=0; i<pop.length; i++){
-        var year = (pop[i].year).slice(-2);
-        var value = "Population: "+pop[i].pop;
-    };
+    $('#population-11')
+        .mouseover(function(event) {
+            var data = Number(pop[0]['pop']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Population:</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#population-12')
+        .mouseover(function(event) {
+            var data = Number(pop[1]['pop']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Population:</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });    
+    $('#population-13')
+        .mouseover(function(event) {
+            var data = Number(pop[2]['pop']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Population:</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });    
+    $('#population-14')
+        .mouseover(function(event) {
+            var data = Number(pop[3]['pop']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Population:</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });    
+    $('#population-15')
+        .mouseover(function(event) {
+            var data = Number(pop[4]['pop']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Population:</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });    
+    $('#population-16')
+        .mouseover(function(event) {
+            var data = Number(pop[5]['pop']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Population:</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });    
+    $('#population-17')
+        .mouseover(function(event) {
+            var data = Number(pop[6]['pop']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Population:</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
     
-    for (i=0; i<reg.length; i++){
-        var year = (reg[i].year).slice(-2);
-        var value = "Registrations: "+reg[i].regs;
-    };
+    $('#registration-11')
+        .mouseover(function(event) {
+            var data = Number(reg[0]['regs']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Auto Registrations:</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#registration-12')
+        .mouseover(function(event) {
+            var data = Number(reg[1]['regs']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Auto Registrations:</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });    
+    $('#registration-13')
+        .mouseover(function(event) {
+            var data = Number(reg[2]['regs']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Auto Registrations:</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });    
+    $('#registration-14')
+        .mouseover(function(event) {
+            var data = Number(reg[3]['regs']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Auto Registrations:</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });    
+    $('#registration-15')
+        .mouseover(function(event) {
+            var data = Number(reg[4]['regs']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Auto Registrations:</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });    
+    $('#registration-16')
+        .mouseover(function(event) {
+            var data = Number(reg[5]['regs']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Auto Registrations:</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });    
+    $('#registration-17')
+        .mouseover(function(event) {
+            var data = Number(reg[6]['regs']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Auto Registrations:</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
     
-    for (i=0; i<ride.length; i++){
-        var year = (ride[i].year).slice(-2);
-        var value = "Ridership (thousands): "+ride[i].rides;
-    };
+    $('#ridership-11')
+        .mouseover(function(event) {
+            var data = Number(ride[0]['rides']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (x1000):</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#ridership-12')
+        .mouseover(function(event) {
+            var data = Number(ride[1]['rides']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (x1000):</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });    
+    $('#ridership-13')
+        .mouseover(function(event) {
+            var data = Number(ride[2]['rides']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (x1000):</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });    
+    $('#ridership-14')
+        .mouseover(function(event) {
+            var data = Number(ride[3]['rides']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (x1000):</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });    
+    $('#ridership-15')
+        .mouseover(function(event) {
+            var data = Number(ride[4]['rides']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (x1000):</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });    
+    $('#ridership-16')
+        .mouseover(function(event) {
+            var data = Number(ride[5]['rides']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (x1000):</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });    
+    $('#ridership-17')
+        .mouseover(function(event) {
+            var data = Number(ride[6]['rides']).toLocaleString('en');
+            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (x1000):</b> '+data+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
 }; //end attachHoverChart
 
 function handleStepEnter(response){
