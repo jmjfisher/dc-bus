@@ -205,7 +205,7 @@ function attachHoverChart(pop,reg,ride,work){
         .mouseover(function(event) {
             var data = Number(work[0]['drive']).toLocaleString('en');
 			var pct = String(work[0]['drivep'])+'%';
-            $('body').append('<div class="data-tooltip line-h"><p><b>Drivers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Drivers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
             positionTooltip(event);
         })
         .mouseout(function(){
@@ -215,7 +215,7 @@ function attachHoverChart(pop,reg,ride,work){
         .mouseover(function(event) {
             var data = Number(work[1]['drive']).toLocaleString('en');
 			var pct = String(work[1]['drivep'])+'%';
-            $('body').append('<div class="data-tooltip line-h"><p><b>Drivers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Drivers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
             positionTooltip(event);
         })
         .mouseout(function(){
@@ -225,7 +225,7 @@ function attachHoverChart(pop,reg,ride,work){
         .mouseover(function(event) {
             var data = Number(work[2]['drive']).toLocaleString('en');
 			var pct = String(work[2]['drivep'])+'%';
-            $('body').append('<div class="data-tooltip line-h"><p><b>Drivers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Drivers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
             positionTooltip(event);
         })
         .mouseout(function(){
@@ -235,7 +235,7 @@ function attachHoverChart(pop,reg,ride,work){
         .mouseover(function(event) {
             var data = Number(work[3]['drive']).toLocaleString('en');
 			var pct = String(work[3]['drivep'])+'%';
-            $('body').append('<div class="data-tooltip line-h"><p><b>Drivers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Drivers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
             positionTooltip(event);
         })
         .mouseout(function(){
@@ -245,7 +245,7 @@ function attachHoverChart(pop,reg,ride,work){
         .mouseover(function(event) {
             var data = Number(work[4]['drive']).toLocaleString('en');
 			var pct = String(work[4]['drivep'])+'%';
-            $('body').append('<div class="data-tooltip line-h"><p><b>Drivers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Drivers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
             positionTooltip(event);
         })
         .mouseout(function(){
@@ -255,7 +255,7 @@ function attachHoverChart(pop,reg,ride,work){
         .mouseover(function(event) {
             var data = Number(work[5]['drive']).toLocaleString('en');
 			var pct = String(work[5]['drivep'])+'%';
-            $('body').append('<div class="data-tooltip line-h"><p><b>Drivers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Drivers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
             positionTooltip(event);
         })
         .mouseout(function(){
@@ -265,8 +265,7 @@ function attachHoverChart(pop,reg,ride,work){
         .mouseover(function(event) {
             var data = Number(work[0]['cp']).toLocaleString('en');
 			var pct = String(work[0]['cpp'])+'%';
-            console.log(data,pct)
-            $('body').append('<div class="data-tooltip line-h"><p><b>Carpoolers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Carpoolers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
             positionTooltip(event);
         })
         .mouseout(function(){
@@ -276,7 +275,7 @@ function attachHoverChart(pop,reg,ride,work){
         .mouseover(function(event) {
             var data = Number(work[1]['cp']).toLocaleString('en');
 			var pct = String(work[1]['cpp'])+'%';
-            $('body').append('<div class="data-tooltip line-h"><p><b>Carpoolers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Carpoolers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
             positionTooltip(event);
         })
         .mouseout(function(){
@@ -286,7 +285,7 @@ function attachHoverChart(pop,reg,ride,work){
         .mouseover(function(event) {
             var data = Number(work[2]['cp']).toLocaleString('en');
 			var pct = String(work[2]['cpp'])+'%';
-            $('body').append('<div class="data-tooltip line-h"><p><b>Carpoolers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Carpoolers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
             positionTooltip(event);
         })
         .mouseout(function(){
@@ -296,7 +295,7 @@ function attachHoverChart(pop,reg,ride,work){
         .mouseover(function(event) {
             var data = Number(work[3]['cp']).toLocaleString('en');
 			var pct = String(work[3]['cpp'])+'%';
-            $('body').append('<div class="data-tooltip line-h"><p><b>Carpoolers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Carpoolers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
             positionTooltip(event);
         })
         .mouseout(function(){
@@ -306,7 +305,7 @@ function attachHoverChart(pop,reg,ride,work){
         .mouseover(function(event) {
             var data = Number(work[4]['cp']).toLocaleString('en');
 			var pct = String(work[4]['cpp'])+'%';
-            $('body').append('<div class="data-tooltip line-h"><p><b>Carpoolers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Carpoolers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
             positionTooltip(event);
         })
         .mouseout(function(){
@@ -316,7 +315,248 @@ function attachHoverChart(pop,reg,ride,work){
         .mouseover(function(event) {
             var data = Number(work[5]['cp']).toLocaleString('en');
 			var pct = String(work[5]['cpp'])+'%';
-            $('body').append('<div class="data-tooltip line-h"><p><b>Carpoolers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Carpoolers:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    
+    $('#public-11')
+        .mouseover(function(event) {
+            var data = Number(work[0]['pub']).toLocaleString('en');
+			var pct = String(work[0]['pubp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Public Transit:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#public-12')
+        .mouseover(function(event) {
+            var data = Number(work[1]['pub']).toLocaleString('en');
+			var pct = String(work[1]['pubp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Public Transit:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#public-13')
+        .mouseover(function(event) {
+            var data = Number(work[2]['pub']).toLocaleString('en');
+			var pct = String(work[2]['pubp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Public Transit:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#public-14')
+        .mouseover(function(event) {
+            var data = Number(work[3]['pub']).toLocaleString('en');
+			var pct = String(work[3]['pubp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Public Transit:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#public-15')
+        .mouseover(function(event) {
+            var data = Number(work[4]['pub']).toLocaleString('en');
+			var pct = String(work[4]['pubp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Public Transit:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#public-16')
+        .mouseover(function(event) {
+            var data = Number(work[5]['pub']).toLocaleString('en');
+			var pct = String(work[5]['pubp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Public Transit:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#walk-11')
+        .mouseover(function(event) {
+            var data = Number(work[0]['walk']).toLocaleString('en');
+			var pct = String(work[0]['walkp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Walk:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#walk-12')
+        .mouseover(function(event) {
+            var data = Number(work[1]['walk']).toLocaleString('en');
+			var pct = String(work[1]['walkp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Walk:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#walk-13')
+        .mouseover(function(event) {
+            var data = Number(work[2]['walk']).toLocaleString('en');
+			var pct = String(work[2]['walkp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Walk:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#walk-14')
+        .mouseover(function(event) {
+            var data = Number(work[3]['walk']).toLocaleString('en');
+			var pct = String(work[3]['walkp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Walk:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#walk-15')
+        .mouseover(function(event) {
+            var data = Number(work[4]['walk']).toLocaleString('en');
+			var pct = String(work[4]['walkp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Walk:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#walk-16')
+        .mouseover(function(event) {
+            var data = Number(work[5]['walk']).toLocaleString('en');
+			var pct = String(work[5]['walkp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Walk:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#other-11')
+        .mouseover(function(event) {
+            var data = Number(work[0]['other']).toLocaleString('en');
+			var pct = String(work[0]['otherp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Other:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#other-12')
+        .mouseover(function(event) {
+            var data = Number(work[1]['other']).toLocaleString('en');
+			var pct = String(work[1]['otherp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Other:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#other-13')
+        .mouseover(function(event) {
+            var data = Number(work[2]['other']).toLocaleString('en');
+			var pct = String(work[2]['otherp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Other:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#other-14')
+        .mouseover(function(event) {
+            var data = Number(work[3]['other']).toLocaleString('en');
+			var pct = String(work[3]['otherp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Other:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#other-15')
+        .mouseover(function(event) {
+            var data = Number(work[4]['other']).toLocaleString('en');
+			var pct = String(work[4]['otherp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Other:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#other-16')
+        .mouseover(function(event) {
+            var data = Number(work[5]['other']).toLocaleString('en');
+			var pct = String(work[5]['otherp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Other:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#home-11')
+        .mouseover(function(event) {
+            var data = Number(work[0]['wah']).toLocaleString('en');
+			var pct = String(work[0]['wahp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Home:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#home-12')
+        .mouseover(function(event) {
+            var data = Number(work[1]['wah']).toLocaleString('en');
+			var pct = String(work[1]['wahp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Home:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#home-13')
+        .mouseover(function(event) {
+            var data = Number(work[2]['wah']).toLocaleString('en');
+			var pct = String(work[2]['wahp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Home:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#home-14')
+        .mouseover(function(event) {
+            var data = Number(work[3]['wah']).toLocaleString('en');
+			var pct = String(work[3]['wahp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Home:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#home-15')
+        .mouseover(function(event) {
+            var data = Number(work[4]['wah']).toLocaleString('en');
+			var pct = String(work[4]['wahp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Home:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
+            positionTooltip(event);
+        })
+        .mouseout(function(){
+            $('.data-tooltip').remove();
+        });
+    $('#home-16')
+        .mouseover(function(event) {
+            var data = Number(work[5]['wah']).toLocaleString('en');
+			var pct = String(work[5]['wahp'])+'%';
+            $('body').append('<div class="data-tooltip"><p><b>Home:</b> '+data+'<br><b>% of all:</b> '+pct+'</p></div>');
             positionTooltip(event);
         })
         .mouseout(function(){
@@ -552,12 +792,12 @@ function addBusStops(map) {
 //function to instantiate the Leaflet map
 function createMap(){
     
-    //var myBounds = [[41, -89.7],[43.9, -86.7]];
+    var myBounds = [[38.5, -78],[39.5, -76]];
     
     var map = L.map('mapid', {
         maxZoom: 18,
         minZoom: 10,
-        //maxBounds: myBounds,
+        maxBounds: myBounds,
         zoomControl:true
     }).setView([38.908, -77.034915], 12);
    
@@ -789,18 +1029,17 @@ function addOtherLayers(map, outline, lines, stations, rapidBus, brtBus, traffic
     var outlinePoly = L.geoJSON(outline,{
         style: outlineOptions}).addTo(map);
     
-    var stationMarkerOptions = {
-        radius: 4,
-        fillColor: "white",
-        color: "#000",
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8
-    };
+    var stationMarker = L.icon({
+        iconUrl: 'img/metro.svg',
+        iconSize: [12,12],
+        shadowUrl: 'img/circle.svg',
+        shadowSize: [13,13]
+        
+    });
     
     var stationPoints = L.geoJSON(stations, {
         pointToLayer: function (feature, latlng) {
-            return L.circleMarker(latlng, stationMarkerOptions);
+            return L.marker(latlng, {icon: stationMarker});
         },
         onEachFeature: stationName
     }).addTo(map);

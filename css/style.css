@@ -1,6 +1,10 @@
 h1, h2, h3, h4, p {
-    font-family: Futura, Trebuchet MS, Arial, sans-serif;
+    font-family: Jaldi, Trebuchet MS, Arial, sans-serif;
     color: white;
+}
+
+p {
+    font-size: 13pt;
 }
 
 body {
@@ -11,16 +15,11 @@ body {
     width: 100%;
     height: 100vh;
     position: relative;
-/*
-    background-image: url(../img/chicago_bw.jpg);
+    background-image: url(../img/drop-line.png);
     background-size:cover;
     background-position: center;
-    font-family: futura, sans-serif;
-    color: #b3ddf2;
     text-align: center;
-    font-size: 36px;
-    padding-top: 120px;
-*/
+    padding-top: 80px;
 }
 
 #dataarea {
@@ -128,11 +127,6 @@ body {
     border-style: solid;
     border-width: 2px;
     border-color: white;
-    z-index: 99999999;
-}
-
-.line-h {
-    line-height: 30px;
 }
 
 .leaflet-control {
