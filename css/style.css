@@ -27,12 +27,12 @@ body {
 #home {
     height: 90vh;
     position: relative;
-    background-image: url(../img/bussvg.svg);
+    background-image: url(../img/lines_drop.svg);
     background-size:cover;
     background-position: center bottom;
     background-repeat: no-repeat;
     text-align: center;
-    padding-top: 210px;
+    padding-top: 180px;
 }
 
 #dataarea {
@@ -43,7 +43,6 @@ body {
 }
 
 .scroll {
-    width: 100%;
     position: relative;
     background-color: #282828
 }
@@ -55,6 +54,14 @@ body {
     bottom: auto;
     width: 100%;
     background-color: #282828
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.scroll__text {
+    max-width: 40%;
+    padding: 2%
 }
 
 .scroll__graphic.is-fixed {
@@ -72,7 +79,7 @@ body {
     position: absolute;
     right: 0px;
     top: 50%;
-}
+    }
 
 #fare-chart, #transport-chart {
     position: absolute;
@@ -147,7 +154,6 @@ body {
 .leaflet-control {
     opacity: .9;
 }
-
 .legend {
     line-height: 18px;
     color: black;
@@ -159,7 +165,6 @@ body {
     margin-right: 8px;
     opacity: 1;
 }
-
 .info {
     padding: 6px 8px;
     font: 14px/16px Arial, Helvetica, sans-serif;

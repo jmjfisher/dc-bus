@@ -1,11 +1,8 @@
-//https://pudding.cool/process/introducing-scrollama/
-//https://design.tutsplus.com/tutorials/how-to-create-an-editable-bar-chart-in-adobe-illustrator--cms-30149
-
 function positionTooltip(event){
     var tPosX = event.pageX - 160;
     var tPosY = event.pageY - 85;
     $('.data-tooltip').css({'position': 'absolute', 'top': tPosY+'px', 'left': tPosX+'px'});
-};
+}; //end positionTooltip
 
 function attachHoverChart(pop,reg,ride,work){  
     
@@ -606,7 +603,7 @@ function handleStepEnter(response){
             $(bar).css('stroke-width','3')
             $(label).css('stroke','#FF6700')
             $(label).css('stroke-width','3')
-        }
+        };
     };
 }; //end handleStepEnter
 
@@ -652,7 +649,7 @@ function handleStepExit(response){
             $(bar).css('stroke-width','.5')
             $(label).css('stroke','#33a02c')
             $(label).css('stroke-width','.5')
-        }
+        };
     };
 }; //end handleStepExit
 
@@ -660,17 +657,20 @@ function handleContainerEnter(direction){
     var graphic = d3.select('.scroll__graphic')
     graphic.classed('is-fixed', true);
     graphic.classed('is-bottom', false);
-}
+    var chart = d3.select('#main-chart');
+    chart.style('right','8px');
+}; //end handleContainerEnter
 
 function handleContainerExit(response){
     var graphic = d3.select('.scroll__graphic')
 	graphic.classed('is-fixed', false);
 	graphic.classed('is-bottom', response.direction === 'down');
-}
+    var chart = d3.select('#main-chart');
+    chart.style('right','0px');
+}; //end handleContainerExit
 
-//function to init D3 charts
 function initCharts(){
-    
+    //https://pudding.cool/process/introducing-scrollama/
     // instantiate the scrollama
     const scroller = scrollama();
 
@@ -687,7 +687,7 @@ function initCharts(){
       .onContainerEnter(handleContainerEnter)
       .onContainerExit(handleContainerExit);
 
-    $('.scroll__graphic').load('img/main_chart.svg');
+    $('.chart').load('img/main_chart.svg');
     $('#chart-2').load('img/transport_chart.svg');
     $('#chart-3').load('img/fare_chart.svg');
     
@@ -742,10 +742,8 @@ function initCharts(){
                 wahp: transportCSV[i]["WAH_P"]
             });
         };
-        
         attachHoverChart(popDataDict,regDataDict,rideDataDict,transportDataDict);
-        
-    };// end callback
+    };
 };//end initCharts
 
 function addBusStops(map) {
