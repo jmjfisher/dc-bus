@@ -852,6 +852,15 @@ function createMap(){
     
         //call function to get everything else available
         var allOtherLayers = addOtherLayers(map, outline, lines, stations, rapidBus, brtBus, traffic);
+        
+        var imageBounds = [[38.824, -77.11], [38.987, -76.914]];
+        var pciUrl = "data/pci_raster.png";
+        var popUrl = "data/pop_raster.png";
+        var pciRaster = L.imageOverlay(pciUrl, imageBounds,{opacity: 0.5});
+        var popRaster = L.imageOverlay(popUrl, imageBounds,{opacity: 0.5});
+        
+        blocksLayers["Pop Raster"] = popRaster;
+        blocksLayers["PCI Raster"] = pciRaster;
 
         var groupedOverlays = {
           "Block Overlays": blocksLayers,
@@ -860,11 +869,12 @@ function createMap(){
         
         //set options for groupedLayers control
         var options = {
-            exclusiveGroups: ["Block Overlays"],
+            exclusiveGroups: ["Block Overlays"]
             //collapsed: false
         }
         
         L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
+        
 /*
         //change legend on block change
         map.on('overlayadd', function(layer){
@@ -998,7 +1008,7 @@ function addOtherLayers(map, outline, lines, stations, rapidBus, brtBus, traffic
     
     var routes = L.geoJSON(lines,{
         style: function(feature){return routeStyle(feature)}
-    }).addTo(map);
+    });
     
 /*
     var colorScale = roadColorScale(traffic);
@@ -1019,9 +1029,10 @@ function addOtherLayers(map, outline, lines, stations, rapidBus, brtBus, traffic
 
     var outlineOptions = {
         color: "#000",
-        weight: 3.5,
+        weight: 2,
         opacity: 0.8,
-        fillOpacity: 0
+        fillOpacity: 0,
+        dashArray: 4
     };
     
     var outlinePoly = L.geoJSON(outline,{
@@ -1040,7 +1051,7 @@ function addOtherLayers(map, outline, lines, stations, rapidBus, brtBus, traffic
             return L.marker(latlng, {icon: stationMarker});
         },
         onEachFeature: stationName
-    }).addTo(map);
+    });
     
     layerDict['DC Outline'] = outlinePoly;
     layerDict['Metrorail Lines'] = routes;
@@ -1116,8 +1127,8 @@ function streetStyle(feature,scale){
 
 function addBlocks(map, tracts) { //source: http://bl.ocks.org/Caged/5779481
     
-    var options = ['POP','PCI','NONE'];
-    var dictKeys = ['Population','Per Capita Income','None']
+    var options = ['NONE','POP','PCI'];
+    var dictKeys = ['None','Population','Per Capita Income']
     
     var altDitc = {};
     var scaleDict = {};
