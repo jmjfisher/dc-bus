@@ -137,7 +137,7 @@ function attachHoverChart(pop,reg,ride,work){
     $('#ridership-11')
         .mouseenter(function(event) {
             var data = Number(ride[0]['rides']).toLocaleString('en');
-            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (x1000):</b> '+data+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (million):</b> '+data+'</p></div>');
             positionTooltip(event);
         })
         .mouseleave(function(){
@@ -146,7 +146,7 @@ function attachHoverChart(pop,reg,ride,work){
     $('#ridership-12')
         .mouseenter(function(event) {
             var data = Number(ride[1]['rides']).toLocaleString('en');
-            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (x1000):</b> '+data+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (million):</b> '+data+'</p></div>');
             positionTooltip(event);
         })
         .mouseleave(function(){
@@ -155,7 +155,7 @@ function attachHoverChart(pop,reg,ride,work){
     $('#ridership-13')
         .mouseenter(function(event) {
             var data = Number(ride[2]['rides']).toLocaleString('en');
-            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (x1000):</b> '+data+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (million):</b> '+data+'</p></div>');
             positionTooltip(event);
         })
         .mouseleave(function(){
@@ -164,7 +164,7 @@ function attachHoverChart(pop,reg,ride,work){
     $('#ridership-14')
         .mouseenter(function(event) {
             var data = Number(ride[3]['rides']).toLocaleString('en');
-            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (x1000):</b> '+data+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (million):</b> '+data+'</p></div>');
             positionTooltip(event);
         })
         .mouseleave(function(){
@@ -173,7 +173,7 @@ function attachHoverChart(pop,reg,ride,work){
     $('#ridership-15')
         .mouseenter(function(event) {
             var data = Number(ride[4]['rides']).toLocaleString('en');
-            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (x1000):</b> '+data+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (million):</b> '+data+'</p></div>');
             positionTooltip(event);
         })
         .mouseleave(function(){
@@ -182,7 +182,7 @@ function attachHoverChart(pop,reg,ride,work){
     $('#ridership-16')
         .mouseenter(function(event) {
             var data = Number(ride[5]['rides']).toLocaleString('en');
-            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (x1000):</b> '+data+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (million):</b> '+data+'</p></div>');
             positionTooltip(event);
         })
         .mouseleave(function(){
@@ -191,7 +191,7 @@ function attachHoverChart(pop,reg,ride,work){
     $('#ridership-17')
         .mouseenter(function(event) {
             var data = Number(ride[6]['rides']).toLocaleString('en');
-            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (x1000):</b> '+data+'</p></div>');
+            $('body').append('<div class="data-tooltip"><p><b>Bus Riders (million):</b> '+data+'</p></div>');
             positionTooltip(event);
         })
         .mouseleave(function(){
@@ -564,7 +564,7 @@ function attachHoverChart(pop,reg,ride,work){
 function handleStepEnter(response){
     var years = ['11','12','13','14','15','16','17']
     var index = response.index;
-    if (index == 0) {
+    if (index == 1) {
         for (i=0; i< years.length; i++){
             var year = years[i];
             var bar = '#population-'+year
@@ -574,7 +574,7 @@ function handleStepEnter(response){
             $(label).css('stroke','#FF6700')
             $(label).css('stroke-width','3')
         }
-    } else if (index == 1){
+    } else if (index == 2){
         for (i=0; i< years.length; i++){
             var year = years[i];
             var bar = '#registration-'+year
@@ -584,7 +584,7 @@ function handleStepEnter(response){
             $(label).css('stroke','#FF6700')
             $(label).css('stroke-width','3')
         }
-    } else if (index == 2){
+    } else if (index == 3){
         for (i=0; i< years.length-1; i++){
             var year = years[i];
             var bar = '#traffic-'+year
@@ -594,7 +594,7 @@ function handleStepEnter(response){
             $(label).css('stroke','#FF6700')
             $(label).css('stroke-width','3')
         }
-    } else if (index == 3){
+    } else if (index == 4){
         for (i=0; i< years.length; i++){
             var year = years[i];
             var bar = '#ridership-'+year
@@ -610,7 +610,7 @@ function handleStepEnter(response){
 function handleStepExit(response){
     var years = ['11','12','13','14','15','16','17']
     var index = response.index;
-    if (index == 0) {
+    if (index == 1) {
         for (i=0; i< years.length; i++){
             var year = years[i];
             var bar = '#population-'+year
@@ -620,7 +620,7 @@ function handleStepExit(response){
             $(label).css('stroke','#a6cee3')
             $(label).css('stroke-width','.5')
         }
-    } else if (index == 1){
+    } else if (index == 2){
         for (i=0; i< years.length; i++){
             var year = years[i];
             var bar = '#registration-'+year
@@ -630,7 +630,7 @@ function handleStepExit(response){
             $(label).css('stroke','#1f78b4')
             $(label).css('stroke-width','.5')
         }
-    } else if (index == 2){
+    } else if (index == 3){
         for (i=0; i< years.length-1; i++){
             var year = years[i];
             var bar = '#traffic-'+year
@@ -640,7 +640,7 @@ function handleStepExit(response){
             $(label).css('stroke','#b2df8a')
             $(label).css('stroke-width','.5')
         }
-    } else if (index == 3){
+    } else if (index == 4){
         for (i=0; i< years.length; i++){
             var year = years[i];
             var bar = '#ridership-'+year
@@ -797,7 +797,7 @@ function createMap(){
         minZoom: 10,
         maxBounds: myBounds,
         zoomControl:true
-    }).setView([38.908, -77.034915], 12);
+    }).setView([38.89, -77.005], 13);
    
     var streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam1qZmlzaGVyIiwiYSI6ImNqYXVlNDg3cDVhNmoyd21oZ296ZXpwdWMifQ.OGprR1AOquImP-bemM-f2g').addTo(map);
 
@@ -845,7 +845,7 @@ function createMap(){
         //call function to add tracts information to add-able layers
         var blocksInformation = addBlocks(map, blocks);
         var blocksLayers = blocksInformation[0];
-        var blocksScales = blocksInformation[1];
+        //var blocksScales = blocksInformation[1];
 
         //add blank blocks to begin...
         blocksLayers["None"].addTo(map);
@@ -863,117 +863,76 @@ function createMap(){
         blocksLayers["PCI Raster"] = pciRaster;
 
         var groupedOverlays = {
-          "Block Overlays": blocksLayers,
+          "Demographic Overlays": blocksLayers,
           "Reference Layers": allOtherLayers
         };
         
         //set options for groupedLayers control
         var options = {
-            exclusiveGroups: ["Block Overlays"]
-            //collapsed: false
+            exclusiveGroups: ["Demographic Overlays"],
+            collapsed: false
         }
         
         L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
         
-/*
-        //change legend on block change
-        map.on('overlayadd', function(layer){
-            //on layer change, update the legend
-            changeLegend(layer, tractScales, map);
-        })
-*/
     };
 
     $(".leaflet-control-container").on('mousedown dblclick pointerdown wheel', function(ev){
         L.DomEvent.stopPropagation(ev);
     });
     
+    var clickMarker = L.marker(50,50);
+    
+    map.on('click', function(e){
+        map.removeLayer(clickMarker);
+        var latlng = map.mouseEventToLatLng(e.originalEvent);
+        var newLatLng = new L.LatLng(latlng.lat, latlng.lng);
+        clickMarker.setLatLng(newLatLng);
+        clickMarker.addTo(map);
+        queryBusStops(map,clickMarker,latlng)
+    });
+    
 }; // end of createMap
 
-// source:http://leafletjs.com/examples/choropleth/
-function changeLegend(layer,tractScales,map){
-    //lol, MTA is NYC
-    var MTA = ['CTA "L" Routes','CTA "L" Stations','CTA Stations 1-Mile Buffer','New Buildings Since 2010']
-    var expressed = layer.name;
+function queryBusStops(map,clickMarker,latlng){
     
-    //if adding MTA layer, don't mess with legend - the rest is housed in this IF statement
-    if (MTA.includes(expressed) == false & expressed != 'Gentrification Index' & expressed != 'None'){
-        
-        //get rid of previous legend
-        var oldLegend = $('.legend');
-        if (oldLegend !== null){
-            oldLegend.remove();
-        }
-        
-        //set up (new) legend
-        var domain = (tractScales[expressed].domain())
-        var max = Math.max.apply(null, domain);
-        var min = Math.min.apply(null, domain);
-        var colors = tractScales[expressed].range();
-        var quantiles = tractScales[expressed].quantiles();
-        quantiles.unshift(min);
-        quantiles.push(max);
-
-        var legend = L.control({position: 'bottomleft'});
-
-        legend.onAdd = function(map){
-
-            var div = L.DomUtil.create('div', 'info legend')
-            var labels = [];
-
-            div.innerHTML += '<p><b>' + expressed + '</b></p>'
-
-            // loop through our density intervals and generate a label with a colored square for each interval
-            for (var i = 0; i < quantiles.length-1; i++) {
-                div.innerHTML +=
-                    '<i style="background:' + colors[i] + '"></i> ' +
-                    quantiles[i].toFixed(0) + '%' + (String(quantiles[i + 1]) ? ' <b>-</b> ' + quantiles[i + 1].toFixed(0) + '%<br>' : '% +');
-            };
-            return div;
+    var lat = latlng.lat;
+    var lng = latlng.lng;
+    var key = 'cxZZf9-tgRgJseGvWAmC4Q';
+    var getURL = 'https://jjfisher2.carto.com/api/v2/sql?format=GeoJSON&q=';
+    var sql = "SELECT name, the_geom FROM JJFISHER2.DC_BUS_STOPS where stopid IN (SELECT DISTINCT(stopid) from JJFISHER2.DC_STOP_ROUTE WHERE route IN (SELECT route FROM JJFISHER2.DC_STOP_ROUTE WHERE stopid = (SELECT stopid FROM JJFISHER2.DC_BUS_STOPS WHERE ST_DISTANCE(the_geom, ST_GeomFromText('POINT("+lng+" "+lat+")',4326)) = (SELECT MIN(ST_DISTANCE(the_geom, ST_GeomFromText('POINT("+lng+" "+lat+")',4326))) FROM JJFISHER2.DC_BUS_STOPS))))&api_key=";
+    
+    $.getJSON(getURL+sql+key, function(data){
+        var features = data.features;
+        console.log(features.length)
+        var busMarkerOptions = {
+            radius: 3.5,
+            fillColor: "black",
+            color: "red",
+            weight: .75,
+            opacity: 0.8,
+            fillOpacity: 0.8
         };
-        legend.addTo(map);
-    } else if (MTA.includes(expressed) == false & expressed == 'Gentrification Index') {
-        //get rid of previous legend
-        var oldLegend = $('.legend');
-        if (oldLegend !== null){
-            oldLegend.remove();
-        }
-        
-        //set up (new) legend
-        var domain = (tractScales[expressed].domain())
-        var max = Math.max.apply(null, domain);
-        var min = Math.min.apply(null, domain);
-        var colors = tractScales[expressed].range();
-        var quantiles = tractScales[expressed].quantiles();
-        quantiles.unshift(min);
-        quantiles.push(max);
 
-        var legend = L.control({position: 'bottomleft'});
+        var busPoints = L.geoJSON(features, {
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, busMarkerOptions);
+            },
+            onEachFeature: busStopName
+        }).addTo(map);
 
-        legend.onAdd = function(map){
+        map.fitBounds(busPoints.getBounds(), {padding:[25,25]});
 
-            var div = L.DomUtil.create('div', 'info legend')
-            var labels = [];
-
-            div.innerHTML += '<p><b>' + expressed + '</b></p>'
-
-            // loop through our density intervals and generate a label with a colored square for each interval
-            for (var i = 0; i < quantiles.length-1; i++) {
-                div.innerHTML +=
-                    '<i style="background:' + colors[i] + '"></i> ' +
-                    quantiles[i].toFixed(3) + (String(quantiles[i + 1]) ? ' <b>-</b> ' + quantiles[i + 1].toFixed(3) + '<br>' : ' +');
-            };
-            return div;
-        };
-        legend.addTo(map);
-    } else if (MTA.includes(expressed) == false & expressed == 'None'){
-        //get rid of previous legend
-        var oldLegend = $('.legend');
-        if (oldLegend !== null){
-            oldLegend.remove();
-        }
-    }
-}; // end of changeLegend
+        $('#add-button').attr("disabled","disabled");
+        $('#clear-button').removeAttr("disabled");
+        $('#clear-button').click(function(){
+            map.removeLayer(busPoints);
+            $('#add-button').removeAttr("disabled");
+            $('#clear-button').attr("disabled","disabled");
+        });
+    });
+    
+}; //end queryBusStops
 
 function addOtherLayers(map, outline, lines, stations, rapidBus, brtBus, traffic){
     
@@ -1164,21 +1123,22 @@ function addBlocks(map, tracts) { //source: http://bl.ocks.org/Caged/5779481
         var fields = ['Population: ','Per Capita Income: ']
 
         var popupContent = '';
-        lookUp.unshift('GEOID');
-        fields.unshift('Block: ');
 
         for (var i=0; i < lookUp.length; i++){
             var stat = String(feature.properties[lookUp[i]]);
             popupContent += '<b>'+fields[i]+'</b>';
             popupContent += stat + '<br>';
         }
-
-        layer.bindPopup(popupContent, {
-            minWidth: 50,
-            closeOnClick: true,
-            className: 'popup'});
         
         if (expressed !== 'NONE'){
+            layer.bindPopup(popupContent, {
+                className: 'popup'});
+            layer.on('mouseover', function (e) {
+                this.openPopup();
+            });
+            layer.on('mouseout', function (e) {
+                this.closePopup();
+            });
             layer.on({
                 mouseover: highlightFeature,
                 mouseout: resetHighlight

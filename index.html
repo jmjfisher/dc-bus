@@ -7,6 +7,7 @@
 		<title>DC Bus Ridership</title>
         <link rel="icon" href="img/bus.ico">
         
+        <link href="https://fonts.googleapis.com/css?family=Fjord+One" rel="stylesheet">  
         <link href="https://fonts.googleapis.com/css?family=Jaldi" rel="stylesheet"> 
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"/>
         <link rel="stylesheet" href="css/leaflet.groupedlayercontrol.min.css">
@@ -19,8 +20,8 @@
         <!--HOME/SPLASH-->
         
         <div id='home'>
-            <h1><i>"Transit ridership fell in 31 of 35 major metropolitan areas in the United States last year..."</i></h1>
-            <h3>Bus ridership in Washington, DC has been in decline since 2013, but why?</h3>
+            <h2>"Transit ridership fell in 31 of 35 major metropolitan areas in the United States last year..."</h2>
+            <h3>Bus ridership in Washington, DC has been in decline since 2013, but do we know why?</h3>
             <p class="descritption">By <a class="p-a" href="http://jmjfisher.com/" target="_blank">JohnMark Fisher</a></p>
         </div>
         
@@ -32,29 +33,35 @@
             </div>
             <div class='scroll__text'>
                 <div class='step' data-step='a'>
+                    <br><br>
+                    <p class='description'>The goal of this website is not to firmly conclude <i>why</i>, but to present data on factors widely regarded as possible reasons this is happening in Washington, DC.</p> <p class='description'>The hope is that you, the reader, are able to digest this information and derive your own theories while reflecting on whether or not these are trends you have observed in your community over the same period of time.</p> <p class='description'> <i>Over the next two infographics, you may hover your mouse over any bar (excluding "Traffic") to derive the actual figures for that year.</i></p><h3>Enjoy!</h3>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                </div>
+                <div class='step' data-step='a'>
                     <h3>Population</h3>
                     <p class='description'><i>Perhaps population has decreased?</i></p>
-                    <p class='description'>Nope, but that is a good guess. If population is dwindling, it would make sense that fewer people would be taking public transportation. However, population in DC has steadily risen since 2006 and Mayor Muriel Bowser is excited about the District potentially topping <a class="p-a" href="https://dc.gov/release/washington-dc-population-closing-700000" target="_blank">700,000</a> residents in 2018.</p>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <p class='description'>Nope, but that is a good guess! If population is dwindling, it would make sense that fewer people would be around to fill the buses. However, population in DC has steadily risen since 2006 and Mayor Muriel Bowser is excited about the District potentially topping <a class="p-a" href="https://dc.gov/release/washington-dc-population-closing-700000" target="_blank">700,000</a> residents in 2018.</p>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br>
                 </div>
                 <div class='step' data-step='b'>
                     <h3>Automobile Registration</h3>
                     <p class='description'><i>Have Washingtonians decided to buy a car and drive themselves?</i></p>
                     <p class='description'>Perhaps... Since 2014, the percentage growth of automobile registrations has outpaced population change. However, one could make the argument that this is due in part to the negative trend in <a class="p-a" href="https://www.eia.gov/opendata/qb.php?sdid=PET.EMM_EPM0_PTE_R1Y_DPG.A" target="_blank">gas prices</a> in the Central Atlantic region (and the U.S. in general) over this same period of time.</p>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br>
                 </div>
                 <div class='step' data-step='c'>
                     <h3>Traffic</h3>
                     <p class='description'><i>The number of cars on the road is outpacing population, surely this must be reflected in the traffic counts?</i></p>
-                    <p class='description'>Unlike population and automobile registrations, traffic has seen some subtle inconsistencies over the years (<i>note: data for 2017 is not yet available</i>). There were percentage decreases in 2011 and 2015, but perhaps the most interesting thing here is the roughly 2.5% increase throughout 2016, right around the same time bus ridership started its significant downward trend...</p>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <p class='description'>Unlike population and automobile registrations, traffic has seen some subtle inconsistencies over the years*. There were percentage decreases in 2011 and 2015, but perhaps the most interesting thing here is the roughly 2.5% increase throughout 2016, right around the same time bus ridership started its significant downward trend...</p>
+                    <p class='description'><i>*: data for 2017 is not yet available</i></p>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br>
                 </div>
                 <div class='step' data-step='d'>
                     <h3>Bus Ridership</h3>
                     <p class='description'>The <i>outlier</i> of the group.</p>
                     <p class='description'>None of the other previous variables saw percentage increases over 3% or fell more than 1.5%. Meanwhile, bus ridership spiked in 2011 with a 6% growth and only six years later saw a 6% dip (on top of two straight years of 4% stumbles).</p>
                     <br><br><br><br><br><br>
-                    <p class='description'>Considering none of these mirror the bus ridership trend, it would be difficult for one to conclude that any one of these factors soley impacted bus ridership. If traffic wasn't getting any better or worse while the population and car ownership were increasing, how exactly were people getting around town?</p>
+                    <p class='description'>Considering none of these mirror the bus ridership trend, it would be difficult for one to conclude that any one of these factors <i>soley</i> impacted bus ridership. If traffic wasn't getting any better or worse while population and car ownership were increasing, how exactly were people getting around town?</p>
                     <br><br><br><br><br><br><br><br><br><br><br>
                 </div>
             </div>
@@ -91,7 +98,7 @@
 		<div id='maparea'>
             <div id='maptext'>
                 <h3>Sandbox Map</h3>
-                <p class='description'>Use this map to help you visualize areas within DC with higher population or per capita income as well as Metrorail routes, stops, proposed 2030 rapid bus routes, and the roads that were in the top 20% of traffic density during 2016.</p><p class='description'>Use the dropdown menu and buttons below to load/remove the DC bus stops (and thus its route) for any route in the Metrobus system! I recommend viewing the per captia income difference from west to east the <a class="p-a" href="https://www.washingtonpost.com/news/digger/wp/2015/03/10/24-tweets-about-metros-x2-bus/?utm_term=.5889ba4f4de1" target="_blank">infamous</a> X2 covers.</p>
+                <p class='description'>"Play" with this map and the spatial data it makes available to answer questions that may have popped into your head while reading the previous sections! The layers available to help with your analysis are population and per capita income hot-spots, Metrorail lines and stations, proposed bus rapid transit (BRT) and rapid bus routes (the difference being that <a class="p-a" href="https://en.wikipedia.org/wiki/Bus_rapid_transit" target="_blank">BRT</a> will have dedicated bus lanes), and the roads that were in the top 20% of traffic density during 2016 (i.e. where to <i>not</i> drive at 5 p.m. on Tuesdays).</p><p class='description'>You may also use the dropdown menu and buttons below to load and remove the DC bus stop locations for any route in the Metrobus system! I recommend viewing the per captia income difference the <a class="p-a" href="https://www.washingtonpost.com/news/digger/wp/2015/03/10/24-tweets-about-metros-x2-bus/?utm_term=.5889ba4f4de1" target="_blank">infamous</a> X2 covers as it travels from west to east.</p>
                 <select id='routes-select'>
                     <option value="none">Bus Routes</option>
                 </select>
