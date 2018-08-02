@@ -7,9 +7,10 @@
 		<title>DC Bus Ridership</title>
         <link rel="icon" href="img/bus.ico">
         
-        <link href="https://fonts.googleapis.com/css?family=Fjord+One" rel="stylesheet">  
-        <link href="https://fonts.googleapis.com/css?family=Jaldi" rel="stylesheet"> 
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fjord+One">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
         <link rel="stylesheet" href="css/leaflet.groupedlayercontrol.min.css">
 		<link rel="stylesheet" href="css/style.css">
 
@@ -98,7 +99,7 @@
 		<div id='maparea'>
             <div id='maptext'>
                 <h3>Sandbox Map</h3>
-                <p class='description'>"Play" with this map and the spatial data it makes available to answer questions that may have popped into your head while reading the previous sections! The layers available to help with your analysis are population and per capita income hot-spots, Metrorail lines and stations, proposed bus rapid transit (BRT) and rapid bus routes (the difference being that <a class="p-a" href="https://en.wikipedia.org/wiki/Bus_rapid_transit" target="_blank">BRT</a> will have dedicated bus lanes), and the roads that were in the top 20% of traffic density during 2016 (i.e. where to <i>not</i> drive at 5 p.m. on Tuesdays).</p><p class='description'>You may also use the dropdown menu and buttons below to load and remove the DC bus stop locations for any route in the Metrobus system! I recommend viewing the per captia income difference the <a class="p-a" href="https://www.washingtonpost.com/news/digger/wp/2015/03/10/24-tweets-about-metros-x2-bus/?utm_term=.5889ba4f4de1" target="_blank">infamous</a> X2 covers as it travels from west to east.</p>
+                <p class='description'>"Play" with this map and the spatial data it makes available to answer questions that may have popped in your head while reading the previous sections! The layers available to help with your analysis are population and per capita income hot-spots, Metrorail lines and stations, proposed bus rapid transit (BRT) and rapid bus routes (the difference being that <a class="p-a" href="https://en.wikipedia.org/wiki/Bus_rapid_transit" target="_blank">BRT</a> will have dedicated bus lanes), and the roads that were in the top 20% of traffic density during 2016 (i.e. where to <i>not</i> drive at 5 p.m. on a Tuesday).</p><p class='description'>You may also <i>right</i> click to drop a pin (left click to remove it) and display all bus stops serviced by routes that serve the bus stop nearest the pin. Use the dropdown menu and buttons below to load bus stops for a specific route in the Metrobus system. Check out the per captia income difference the <a class="p-a" href="https://www.washingtonpost.com/news/digger/wp/2015/03/10/24-tweets-about-metros-x2-bus/?utm_term=.5889ba4f4de1" target="_blank">infamous</a> X2 covers as it travels from west to east. The "Remove Stops" button clears all stops from the map.</p>
                 <select id='routes-select'>
                     <option value="none">Bus Routes</option>
                 </select>
@@ -125,7 +126,9 @@
         <script src='https://unpkg.com/simple-statistics@6.1.0/dist/simple-statistics.min.js'></script>
         <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
         <script type="text/javascript" src="lib/leaflet.groupedlayercontrol.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
         <script src="https://bl.ocks.org/syntagmatic/raw/3341641/render-queue.js"></script>
+
         <script type="text/javascript" src="js/main.js"></script>
         
 	</body>

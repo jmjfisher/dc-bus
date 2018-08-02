@@ -875,22 +875,52 @@ function createMap(){
         
         L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
         
+        var clickMarker = L.marker();
+
+        map.on('contextmenu',function(e){
+            map.removeLayer(clickMarker);
+            var latlng = map.mouseEventToLatLng(e.originalEvent);
+            var newLatLng = new L.LatLng(latlng.lat, latlng.lng);
+            clickMarker.setLatLng(newLatLng);
+            clickMarker.addTo(map);
+            queryBusStops(map,clickMarker,latlng)
+        });
+        
+        map.on('click',function(e){
+            map.removeLayer(clickMarker);
+        })
+
+        L.easyButton('fa-sync-alt',function(btn,map){
+
+            map.eachLayer(function (layer) {
+                if (layer != imagery && layer != streets){
+                    map.removeLayer(layer);
+                };
+            });
+
+            blocksLayers["None"].addTo(map);
+            allOtherLayers["DC Outline"].addTo(map);
+            map.setView([38.89, -77.005], 13);
+            
+            $('.legend').html('<p class="legend-p">Right click the map to display the nearest bus routes and their destinations.</p>');
+
+        },'Reset Map',{
+            position: 'topleft'
+        }).addTo(map);
+        
     };
 
     $(".leaflet-control-container").on('mousedown dblclick pointerdown wheel', function(ev){
         L.DomEvent.stopPropagation(ev);
     });
     
-    var clickMarker = L.marker(50,50);
-    
-    map.on('click', function(e){
-        map.removeLayer(clickMarker);
-        var latlng = map.mouseEventToLatLng(e.originalEvent);
-        var newLatLng = new L.LatLng(latlng.lat, latlng.lng);
-        clickMarker.setLatLng(newLatLng);
-        clickMarker.addTo(map);
-        queryBusStops(map,clickMarker,latlng)
-    });
+    var legend = L.control({position: 'bottomleft'});
+    legend.onAdd = function(map){
+        var div = L.DomUtil.create('div', 'info legend')
+        div.innerHTML += '<p class="legend-p">Right click the map to display the nearest bus routes and their destinations.</p>';
+        return div;
+    };
+    legend.addTo(map);
     
 }; // end of createMap
 
@@ -900,11 +930,12 @@ function queryBusStops(map,clickMarker,latlng){
     var lng = latlng.lng;
     var key = 'cxZZf9-tgRgJseGvWAmC4Q';
     var getURL = 'https://jjfisher2.carto.com/api/v2/sql?format=GeoJSON&q=';
-    var sql = "SELECT name, the_geom FROM JJFISHER2.DC_BUS_STOPS where stopid IN (SELECT DISTINCT(stopid) from JJFISHER2.DC_STOP_ROUTE WHERE route IN (SELECT route FROM JJFISHER2.DC_STOP_ROUTE WHERE stopid = (SELECT stopid FROM JJFISHER2.DC_BUS_STOPS WHERE ST_DISTANCE(the_geom, ST_GeomFromText('POINT("+lng+" "+lat+")',4326)) = (SELECT MIN(ST_DISTANCE(the_geom, ST_GeomFromText('POINT("+lng+" "+lat+")',4326))) FROM JJFISHER2.DC_BUS_STOPS))))&api_key=";
+    var getURL2 = 'https://jjfisher2.carto.com/api/v2/sql?q=';
+    var sql1 = "SELECT name, the_geom FROM JJFISHER2.DC_BUS_STOPS where stopid IN (SELECT DISTINCT(stopid) from JJFISHER2.DC_STOP_ROUTE WHERE route IN (SELECT route FROM JJFISHER2.DC_STOP_ROUTE WHERE stopid = (SELECT stopid FROM JJFISHER2.DC_BUS_STOPS WHERE ST_DISTANCE(the_geom, ST_GeomFromText('POINT("+lng+" "+lat+")',4326)) = (SELECT MIN(ST_DISTANCE(the_geom, ST_GeomFromText('POINT("+lng+" "+lat+")',4326))) FROM JJFISHER2.DC_BUS_STOPS))))&api_key=";
+    var sql2 = "SELECT DISTINCT(route) FROM JJFISHER2.DC_STOP_ROUTE WHERE stopid = (SELECT stopid FROM JJFISHER2.DC_BUS_STOPS WHERE ST_DISTANCE(the_geom, ST_GeomFromText('POINT("+lng+" "+lat+")',4326)) = (SELECT MIN(ST_DISTANCE(the_geom, ST_GeomFromText('POINT("+lng+" "+lat+")',4326))) FROM JJFISHER2.DC_BUS_STOPS))&api_key=";
     
-    $.getJSON(getURL+sql+key, function(data){
+    $.getJSON(getURL+sql1+key, function(data){
         var features = data.features;
-        console.log(features.length)
         var busMarkerOptions = {
             radius: 3.5,
             fillColor: "black",
@@ -929,7 +960,20 @@ function queryBusStops(map,clickMarker,latlng){
             map.removeLayer(busPoints);
             $('#add-button').removeAttr("disabled");
             $('#clear-button').attr("disabled","disabled");
+            $('.legend').html('<p class="legend-p">Right click the map to display the nearest bus routes and their destinations.</p>');
         });
+    });
+    
+    $.getJSON(getURL2+sql2+key, function(data,error){
+        var features = data.rows;
+        var routeString = '';
+        for (i=0;i<features.length;i++){
+            var route = features[i]["route"]
+            routeString += route + ' // ';
+        };
+        var len = routeString.length - 4;
+        var finalString = routeString.slice(0,len);
+        $('.legend').html('<p class="legend-p"><b>Routes</b>: '+finalString+'</p>')
     });
     
 }; //end queryBusStops
