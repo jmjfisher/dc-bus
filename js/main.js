@@ -1164,19 +1164,22 @@ function addBlocks(map, tracts) { //source: http://bl.ocks.org/Caged/5779481
     function onEachFeature(feature,layer,expressed) {
 
         var lookUp = ['POP', 'PCI']
-        var fields = ['Population: ','Per Capita Income: ']
+        var fields = ['<b>Population:</b> ','<b>Per Capita Income:</b> $']
 
         var popupContent = '';
 
         for (var i=0; i < lookUp.length; i++){
             var stat = String(feature.properties[lookUp[i]]);
-            popupContent += '<b>'+fields[i]+'</b>';
-            popupContent += stat + '<br>';
+            var int = parseInt(stat,10);
+            var insert = int.toLocaleString()
+            popupContent += fields[i];
+            popupContent += insert + '<br>';
         }
         
         if (expressed !== 'NONE'){
             layer.bindPopup(popupContent, {
-                className: 'popup'});
+                className: 'popup',
+                closeButton: false});
             layer.on('mouseover', function (e) {
                 this.openPopup();
             });

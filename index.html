@@ -21,6 +21,7 @@
         <!--HOME/SPLASH-->
         
         <div id='home'>
+            <h1 id='beta'>!!~*~BETA TESTING (Consider all graphics and text as draft)~*~!!</h1>
             <h2>"Transit ridership fell in 31 of 35 major metropolitan areas in the United States last year..."</h2>
             <h3>Bus ridership in Washington, DC has been in decline since 2013, but do we know why?</h3>
             <p class="descritption">By <a class="p-a" href="http://jmjfisher.com/" target="_blank">JohnMark Fisher</a></p>
@@ -35,7 +36,7 @@
             <div class='scroll__text'>
                 <div class='step' data-step='a'>
                     <br><br>
-                    <p class='description'>The goal of this website is not to firmly conclude <i>why</i>, but to present data on factors widely regarded as possible reasons this is happening in Washington, DC.</p> <p class='description'>The hope is that you, the reader, are able to digest this information and derive your own theories while reflecting on whether or not these are trends you have observed in your community over the same period of time.</p> <p class='description'> <i>Over the next two infographics, you may hover your mouse over any bar (excluding "Traffic") to derive the actual figures for that year.</i></p><h3>Enjoy!</h3>
+                    <p class='description'>The goal of this website is <b>not</b> to firmly conclude why bus ridership is decreasing, but to present Washington, DC specific data in an easily digestible manner on factors widely regarded as possible reasons this is happening.</p> <p class='description'>The hope is that you, the reader, are able to take in this information and derive your own theories while reflecting on whether or not these are trends you have observed in your community over the same period of time.</p> <p class='description'> <i>Over the next two infographics, you may hover your mouse over any bar (excluding "Traffic") to derive the actual figures for that year.</i></p><h3>Enjoy!</h3>
                     <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                 </div>
                 <div class='step' data-step='a'>
@@ -54,7 +55,7 @@
                     <h3>Traffic</h3>
                     <p class='description'><i>The number of cars on the road is outpacing population, surely this must be reflected in the traffic counts?</i></p>
                     <p class='description'>Unlike population and automobile registrations, traffic has seen some subtle inconsistencies over the years*. There were percentage decreases in 2011 and 2015, but perhaps the most interesting thing here is the roughly 2.5% increase throughout 2016, right around the same time bus ridership started its significant downward trend...</p>
-                    <p class='description'><i>*: data for 2017 is not yet available</i></p>
+                    <p class='description'><i>* data for 2017 is not yet available</i></p>
                     <br><br><br><br><br><br><br><br><br><br><br><br><br>
                 </div>
                 <div class='step' data-step='d'>
@@ -74,7 +75,7 @@
             <div class='chart-text'>
                 <br>
                 <h3>Means of Commuting</h3>
-                <p class='description'>The means of transportation that residents used to commute to and from work between 2011-2016 has stayed quite consistent, but there is a pattern of change developing! We saw there are more cars in DC, but those driving alone and carpooling have actually seen slight decreases, which may be due to the fact that DC is consistently among the cities with the <a class="p-a" href="https://wtop.com/local/2018/02/much-time-d-c-area-drivers-spend-stuck-congested-traffic/" target="_blank">worst traffic</a> (cars can be convenient, but crawling along the Beltway is a sureifre way to kill your caffeine buzz).</p>
+                <p class='description'>The means of transportation that residents used to commute to and from work between 2011-2016 has stayed quite consistent, but there is a pattern of change developing! We saw there are more cars in DC, but those driving alone and carpooling have actually seen slight percentage decreases, which may be due to the fact that DC is consistently among the cities with the <a class="p-a" href="https://wtop.com/local/2018/02/much-time-d-c-area-drivers-spend-stuck-congested-traffic/" target="_blank">worst traffic</a> (cars can be convenient, but crawling along the Beltway is a surefire way to kill your caffeine buzz).</p>
                 <p class='description'><i>How are they getting to work now?</i> Public transportation saw growth from 2011-2013, but has been decreasing ever since...</p>
                 <p class='description'>We are now left with three categories that have seen steady increases: walkers, "other", and those that work from home. With technological advances granting more workers the ability to work remotely (myself included) and the numerous development projects of DC reaching their <a class="p-a" href="https://www.bizjournals.com/washington/news/2017/12/14/good-bad-ugly-d-c-economic-development-by-the.html" target="_blank">relative peak</a>, it makes sense that more people would live nearer to their offices or stay home all together.</p>
                 <p class='description'>"Other" includes bikers (with <i>and</i> without motors) and those that hail a ride the old fashioned way or through their mobile devices. Thanks to <a class="p-a" href="http://godcgo.com/wp-content/uploads/2018/05/goDCgo_bike_factsheet_052918.pdf" target="_blank">options</a>, cyclists have pedaled DC into the <a class="p-a" href="https://www.citylab.com/transportation/2017/12/how-washington-dc-built-a-bike-boom/548903/" target="_blank">#2 spot</a> of a "top biking cities in the U.S." list. As for hailing a ride, this <i>seems</i> low considering the <a class="p-a" href="http://www.businessofapps.com/data/uber-statistics/#1" target="_blank">meteoric rise</a> of ride-sharing applications, but receiving pure <a class="p-a" href="https://www.citylab.com/transportation/2017/07/private-mobility-services-need-to-share-their-data-heres-how/532482/" target="_blank">data</a> from these companies still remains a pipe-dream to <a class="p-a" href="https://www.wired.com/story/uber-nacto-data-sharing/" target="_blank">most</a>. Until aggregate data is made widely available, we will be unable to fully understand this technology's impact on bus ridership beyond assumptions based on individual or anecdotal observations.</p>
@@ -103,8 +104,8 @@
                 <select id='routes-select'>
                     <option value="none">Bus Routes</option>
                 </select>
-                <button id="add-button" type="button">Map Stops</button>
-                <button id="clear-button" type="button" disabled>Remove Stops</button>
+                <button class='css-button' id="add-button" type="button">Map Stops</button>
+                <button class='css-button' id="clear-button" type="button" disabled>Remove Stops</button>
             </div>
             <div id='mapid'></div>
         </div>
@@ -112,8 +113,17 @@
         <br><br><br><br>
         
         <div id='about'>
-            <h3>In conclusion...</h3>
-            <p class='description'>Analyst have been able to </p>
+            <div id='final'>
+                <h3>In conclusion...</h3>
+                <p class='description'>Lorem ipsum dolor sit amet, vim expetendis reprehendunt eu, te agam nulla facete eos. Pri cu autem graece platonem, sea simul laudem semper ne, sumo adhuc consulatu per te. Sed stet facilisis elaboraret ei. Te graecis minimum evertitur per, an platonem scripserit dissentiet sit.</p>
+                <br><br><br><br><br><br><br><br>
+                <p>+++++++++++</p>
+                <p><b>References</b></p>
+                <p class='ref'>XYZ</p>
+                <p class='ref'>XYZ</p>
+                <p class='ref'>XYZ</p>
+                <p class='ref'>XYZ</p>
+            </div>
         </div>
         
         <!--SCRIPTS-->
