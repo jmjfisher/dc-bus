@@ -5,14 +5,14 @@
 		<meta name="viewport" content="width=device-width">
         
 		<title>DC Bus Ridership</title>
-        <link rel="icon" href="img/bus.ico">
+        <link rel="icon" href="img/bus.svg">
         
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fjord+One">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"/>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+        <link rel="stylesheet" href="lib/leaflet/leaflet.css">
+        <link rel="stylesheet" href="css/leaflet-easy-button.css">
         <link rel="stylesheet" href="css/leaflet.groupedlayercontrol.min.css">
-		<link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/style.css">
 
 	</head>
 
@@ -117,27 +117,34 @@
                 <h3>In conclusion...</h3>
                 <p class='description'>Lorem ipsum dolor sit amet, vim expetendis reprehendunt eu, te agam nulla facete eos. Pri cu autem graece platonem, sea simul laudem semper ne, sumo adhuc consulatu per te. Sed stet facilisis elaboraret ei. Te graecis minimum evertitur per, an platonem scripserit dissentiet sit.</p>
                 <br><br><br><br><br><br><br><br>
-                <p>+++++++++++</p>
-                <p><b>References</b></p>
-                <p class='ref'>XYZ</p>
-                <p class='ref'>XYZ</p>
-                <p class='ref'>XYZ</p>
-                <p class='ref'>XYZ</p>
+                <p>+ + + + + + +</p>
+                <p><b>Data Sources and References</b></p>
+                <p class='ref'><a class="p-a" href="https://factfinder.census.gov/faces/nav/jsf/pages/index.xhtml" target="_blank">Population, Per Capita Income, and Means of Commuting</a></p>
+                <p class='ref'><a class="p-a" href="https://www.google.com" target="_blank">DC Car Registration</a></p>
+                <p class='ref'><a class="p-a" href="https://www.wmata.com/about/records/public-records.cfm" target="_blank">Bus Ridership</a></p>
+                <p class='ref'><a class="p-a" href="https://www.wmata.com/about/records/public_docs/upload/History-of-Fare-Increases-FY2015.pdf" target="_blank">Metrobus Fare History</a></p>
+                <p class='ref'><a class="p-a" href="http://opendata.dc.gov/" target="_blank">Traffic Volume and DC Geospatial Data</a></p>
+                <p class='ref'><a class="p-a" href="https://www.mapbox.com/maps/" target="_blank">Base Maps</a></p>
+                <br>
+                <p class='ref'>Lede Quote: <a class="p-a" href="https://www.washingtonpost.com/local/trafficandcommuting/falling-transit-ridership-poses-an-emergency-for-cities-experts-fear/2018/03/20/ffb67c28-2865-11e8-874b-d517e912f125_story.html?utm_term=.543e998465d3" target="_blank">Washington Post</a> March 20th, 2018</p>
+                <br>
+                <p class='ref'>Bus icon made by <a class="p-a" href="https://www.flaticon.com/authors/vectors-market" title="Vectors Market" target="_blank">Vectors Market</a> from <a class="p-a" href="https://www.flaticon.com/" title="Flaticon" target="_blank">www.flaticon.com</a> is licensed by <a class="p-a" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>
+                <p class='ref'>Metro icon made by <a class="p-a" href="http://www.freepik.com" title="Freepik" target="_blank">Freepik</a> from <a class="p-a" href="https://www.flaticon.com/" title="Flaticon" target="_blank">www.flaticon.com</a> is licensed by <a class="p-a" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>
             </div>
         </div>
         
         <!--SCRIPTS-->
 
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src='https://unpkg.com/scrollama'></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
-        <script src="https://unpkg.com/topojson@3"></script>
-        <script src="https://d3js.org/d3-queue.v3.min.js"></script>
-        <script src='https://unpkg.com/simple-statistics@6.1.0/dist/simple-statistics.min.js'></script>
-        <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+        <script type="text/javascript" src="lib/jquery.min.js"></script>
+        <script type="text/javascript" src='lib/scrollama.min.js'></script>
+        <script type="text/javascript" src="lib/d3.min.js"></script>
+        <script type="text/javascript" src="lib/topojson.js"></script>
+        <script type="text/javascript" src="lib/d3-queue.min.js"></script>
+        <script type="text/javascript" src='lib/simple-stat.min.js'></script>
+        <script type="text/javascript" src="lib/leaflet/leaflet.js"></script>
         <script type="text/javascript" src="lib/leaflet.groupedlayercontrol.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
-        <script src="https://bl.ocks.org/syntagmatic/raw/3341641/render-queue.js"></script>
+        <script type="text/javascript" src="lib/leaflet-easybutton.js"></script>
+        <script type="text/javascript" src="lib/render-queue.js"></script>
 
         <script type="text/javascript" src="js/main.js"></script>
         

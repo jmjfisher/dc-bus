@@ -952,7 +952,7 @@ function queryBusStops(map,clickMarker,latlng){
             onEachFeature: busStopName
         }).addTo(map);
 
-        map.fitBounds(busPoints.getBounds(), {padding:[25,25]});
+        map.fitBounds(busPoints.getBounds(), {padding:[10,10]});
 
         $('#add-button').attr("disabled","disabled");
         $('#clear-button').removeAttr("disabled");
