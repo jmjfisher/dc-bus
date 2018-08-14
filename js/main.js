@@ -796,7 +796,8 @@ function createMap(){
         maxZoom: 18,
         minZoom: 10,
         maxBounds: myBounds,
-        zoomControl:true
+        zoomControl: true,
+        scrollWheelZoom: false
     }).setView([38.89, -77.005], 13);
    
     var streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam1qZmlzaGVyIiwiYSI6ImNqYXVlNDg3cDVhNmoyd21oZ296ZXpwdWMifQ.OGprR1AOquImP-bemM-f2g').addTo(map);
