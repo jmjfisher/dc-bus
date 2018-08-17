@@ -798,7 +798,7 @@ function createMap(){
         maxBounds: myBounds,
         zoomControl: true,
         scrollWheelZoom: false
-    }).setView([38.89, -77.005], 12);
+    }).setView([38.89, -77.0005], 12);
    
     var streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam1qZmlzaGVyIiwiYSI6ImNqYXVlNDg3cDVhNmoyd21oZ296ZXpwdWMifQ.OGprR1AOquImP-bemM-f2g').addTo(map);
 
@@ -901,7 +901,7 @@ function createMap(){
 
             blocksLayers["None"].addTo(map);
             allOtherLayers["DC Outline"].addTo(map);
-            map.setView([38.89, -77.005], 12);
+            map.setView([38.89, -77.0005], 12);
             
             $('#add-button').removeAttr("disabled");
             $('#clear-button').attr("disabled","disabled");
