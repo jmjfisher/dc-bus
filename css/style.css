@@ -109,7 +109,6 @@ body {
 }
 
 .scroll__text {
-    max-width: 40%;
     padding: 2%
 }
 
@@ -128,7 +127,7 @@ body {
     position: absolute;
     right: 0px;
     top: 50%;
-    }
+}
 
 #fare-chart, #transport-chart {
     position: absolute;
@@ -153,9 +152,9 @@ body {
 
 .chart-text {
     position: absolute;
-    width: 36%;
     height:90vh;
     left: 2%;
+    right: 2%;
     bottom: 5vh;
 }
 

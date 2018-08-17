@@ -615,40 +615,32 @@ function handleStepExit(response){
             var year = years[i];
             var bar = '#population-'+year
             var label = '#population-b'
-            $(bar).css('stroke','#a6cee3')
-            $(bar).css('stroke-width','.5')
-            $(label).css('stroke','#a6cee3')
-            $(label).css('stroke-width','.5')
+            $(bar).css('stroke-width','0')
+            $(label).css('stroke-width','0')
         }
     } else if (index == 2){
         for (i=0; i< years.length; i++){
             var year = years[i];
             var bar = '#registration-'+year
             var label = '#registration-b'
-            $(bar).css('stroke','#1f78b4')
-            $(bar).css('stroke-width','.5')
-            $(label).css('stroke','#1f78b4')
-            $(label).css('stroke-width','.5')
+            $(bar).css('stroke-width','0')
+            $(label).css('stroke-width','0')
         }
     } else if (index == 3){
         for (i=0; i< years.length-1; i++){
             var year = years[i];
             var bar = '#traffic-'+year
             var label = '#traffic-b'
-            $(bar).css('stroke','#b2df8a')
-            $(bar).css('stroke-width','.5')
-            $(label).css('stroke','#b2df8a')
-            $(label).css('stroke-width','.5')
+            $(bar).css('stroke-width','0')
+            $(label).css('stroke-width','0')
         }
     } else if (index == 4){
         for (i=0; i< years.length; i++){
             var year = years[i];
             var bar = '#ridership-'+year
             var label = '#ridership-b'
-            $(bar).css('stroke','#33a02c')
-            $(bar).css('stroke-width','.5')
-            $(label).css('stroke','#33a02c')
-            $(label).css('stroke-width','.5')
+            $(bar).css('stroke-width','0')
+            $(label).css('stroke-width','0')
         };
     };
 }; //end handleStepExit
@@ -687,9 +679,17 @@ function initCharts(){
       .onContainerEnter(handleContainerEnter)
       .onContainerExit(handleContainerExit);
 
-    $('.chart').load('img/main_chart.svg');
+    $('.chart').load('img/main_chartsk.svg');
     $('#chart-2').load('img/transport_chart.svg');
-    $('#chart-3').load('img/fare_chart.svg');
+    $('#chart-3').load('img/money_chart.svg');
+    
+    var bodywidth = $('body').width();
+    var twopct = bodywidth*.02;
+    var scrollwidth = String(bodywidth-twopct-twopct-788)+'px';
+    var charttextwidth = String(bodywidth-twopct-twopct-800)+'px';
+    
+    $('.scroll__text').css('width', scrollwidth);
+    $('.chart-text').css('width', charttextwidth);
     
     d3.queue()
         .defer(d3.csv, "data/dc_pop.csv") //load attributes from csv
@@ -798,7 +798,7 @@ function createMap(){
         maxBounds: myBounds,
         zoomControl: true,
         scrollWheelZoom: false
-    }).setView([38.89, -77.005], 13);
+    }).setView([38.89, -77.005], 12);
    
     var streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/light-v9/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoiam1qZmlzaGVyIiwiYSI6ImNqYXVlNDg3cDVhNmoyd21oZ296ZXpwdWMifQ.OGprR1AOquImP-bemM-f2g').addTo(map);
 
@@ -901,7 +901,10 @@ function createMap(){
 
             blocksLayers["None"].addTo(map);
             allOtherLayers["DC Outline"].addTo(map);
-            map.setView([38.89, -77.005], 13);
+            map.setView([38.89, -77.005], 12);
+            
+            $('#add-button').removeAttr("disabled");
+            $('#clear-button').attr("disabled","disabled");
             
             $('.legend').html('<p class="legend-p">Right click the map to display the nearest bus routes and their destinations.</p>');
 
@@ -1132,7 +1135,7 @@ function streetStyle(feature,scale){
 function addBlocks(map, tracts) { //source: http://bl.ocks.org/Caged/5779481
     
     var options = ['NONE','POP','PCI'];
-    var dictKeys = ['None','Population','Per Capita Income']
+    var dictKeys = ['None','Population','Per Capita Income (PCI)']
     
     var altDitc = {};
     var scaleDict = {};
