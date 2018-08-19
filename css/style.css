@@ -13,8 +13,10 @@ p {
     line-height: 4pt;
 }
 
-#beta {
-    color: hotpink;
+#scroll-button {
+    width: 40px;
+    height: 40px;
+    opacity: .8;
 }
 
 .css-button {

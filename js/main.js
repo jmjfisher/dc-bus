@@ -679,7 +679,7 @@ function initCharts(){
       .onContainerEnter(handleContainerEnter)
       .onContainerExit(handleContainerExit);
 
-    $('.chart').load('img/main_chartsk.svg');
+    $('.chart').load('img/main_chart.svg');
     $('#chart-2').load('img/transport_chart.svg');
     $('#chart-3').load('img/money_chart.svg');
     
@@ -749,7 +749,7 @@ function initCharts(){
 function addBusStops(map) {
     var selectRoute = $('#routes-select').val();
     if (selectRoute == 'none'){
-        alert('Please select a route from the list.')
+        alert('Please select a bus route from the drop down menu.')
     } else {
         var key = 'cxZZf9-tgRgJseGvWAmC4Q';
         var getURL = 'https://jjfisher2.carto.com/api/v2/sql?format=GeoJSON&q=';
@@ -925,6 +925,36 @@ function createMap(){
         return div;
     };
     legend.addTo(map);
+    
+    var pciLegend = L.control({position: 'bottomleft'});
+    pciLegend.onAdd = function(map){
+        var div = L.DomUtil.create('div')
+        div.innerHTML += '<img src="img/pci_legend.png">';
+        return div;
+    };
+    
+    var popLegend = L.control({position: 'bottomleft'});
+    popLegend.onAdd = function(map){
+        var div = L.DomUtil.create('div')
+        div.innerHTML += '<img src="img/pop_legend.png">';
+        return div;
+    };
+
+    map.on('overlayadd', function(layer){
+        if (layer.name == 'PCI Raster'){
+            pciLegend.addTo(map);
+        } else if (layer.name == 'Pop Raster'){
+            popLegend.addTo(map);
+        }
+    });
+    
+    map.on('overlayremove', function(layer){
+        if (layer.name == 'PCI Raster'){
+            pciLegend.remove(map);
+        } else if (layer.name == 'Pop Raster'){
+            popLegend.remove(map);
+        }
+    });
     
 }; // end of createMap
 
@@ -1295,5 +1325,14 @@ function roadColorScale(roads){
 }; // end of  roadColorScale
 */
 
+function scrollSet(){
+    $('#scroll-button').on('click',function(event){
+      $('html, body').animate({
+        scrollTop: $('#start').offset().top
+      }, 800);
+    })
+};
+
 $(document).ready(createMap);
 $(document).ready(initCharts);
+$(document).ready(scrollSet);
